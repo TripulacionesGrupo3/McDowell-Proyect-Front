@@ -25,6 +25,8 @@
 .containter_custom_menu {
     display: flex;
     padding: 2em 1.3rem;
+    gap: 1rem;
+    flex-direction: column;
 }
 
 .text_custom_menu {
@@ -51,4 +53,37 @@
     padding: 0.5rem;
     width: 20vw;
     justify-content: center;
+}
+
+.container_ingredients{
+    display: flex;
+    border: 2px solid #74AF00;
+    border-radius: 8px;
+    padding: 0.5rem;
+    box-sizing: border-box;
+}
+
+.ingredients_options{
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem;
+    justify-content: space-between;
+}
+
+.btn_ingredients{
+    display: flex;
+    border: none;
+    background-color: white;
+    align-items: center;
+    gap: 10px;
+    padding: 0;
+}
+
+.total_ingredients_options{
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem;
+    justify-content: flex-end;
+    align-items: flex-end;
+    width: 7rem;
 }

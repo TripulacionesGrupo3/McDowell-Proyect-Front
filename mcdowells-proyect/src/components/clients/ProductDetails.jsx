@@ -1,4 +1,3 @@
-import React from 'react';
 import '../../assets/clients/productdetails.css'
 import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
@@ -8,7 +7,9 @@ import ProductsManager from '../../services/products.Api';
 import NavBarMenus from './Navbar_Menus';
 import logoTop from '../../assets/images/single_menu_top.png'
 import { Typography } from '@mui/material';
-
+import ingredients from '../../libs/ingredients';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 
 function ProductDetails() {
 
@@ -57,7 +58,8 @@ function ProductDetails() {
 
     return (
         <>
-            <div className='containter_single_1'>
+            <NavBarMenus />
+            {/* <div className='containter_single_1'>
                 <NavBarMenus />
 
                 <div className='text_top'>
@@ -68,7 +70,7 @@ function ProductDetails() {
                 <div className='container_logo_single'>
                     <img src={logoTop} alt={logoTop} className="logo_single" />
                 </div>
-            </div>
+    </div> */}
             <div className='containter_custom_menu'>
                 <div className='text_custom_menu'>
                     <Typography variant='h2' sx={{ fontWeight: "bold", fontSize: "24px" }}>
@@ -83,11 +85,42 @@ function ProductDetails() {
                 <Typography variant='h2' sx={{ fontWeight: "bold", fontSize: "24px" }} >
                     ¡Como tú quieras!
                 </Typography>
-                <div className='btn_single'>
-                <Typography variant='body1' sx={{ fontWeight: "bold", fontSize: "14px" }}>
-                    Continuar
-                </Typography>
+                <div className='btn_single' onClick={()=> navigate("/menus/adds-on")}>
+                    <Typography variant='body1' sx={{ fontWeight: "bold", fontSize: "14px" }}>
+                        Continuar
+                    </Typography>
                 </div>
+            </div>
+            <div className='containter_custom_menu'>
+                {ingredients.map((product) =>
+                    <div className='container_ingredients' >
+                        <div className='ingredients_options'>
+                            <img src={product.image} />
+                        </div>
+                        <div className='ingredients_options'>
+                            <Typography variant='h2' sx={{ fontWeight: "bold", fontSize: "24px" }}>
+                                {product.title}
+                            </Typography>
+                            <button className='btn_ingredients'>
+                                <AddCircleOutlineIcon />
+                                <Typography variant='body1' sx={{ fontWeight: "bold", fontSize: "14px" }}>
+                                    Añadir
+                                </Typography>
+                            </button>
+                            <button className='btn_ingredients'>
+                                <RemoveCircleOutlineIcon />
+                                <Typography variant='body1' sx={{ fontWeight: "bold", fontSize: "14px" }}>
+                                    Quitar
+                                </Typography>
+                            </button>
+                        </div>
+                        <div className='total_ingredients_options'>
+                            <Typography variant='body1' sx={{ fontWeight: "bold", fontSize: "14px" }}>
+                                + 0.00€
+                            </Typography>
+                        </div>
+                    </div>
+                )}
             </div>
         </>
     )

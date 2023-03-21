@@ -17,6 +17,7 @@ import Employees from "./components/employees/Employees";
 import RegisterEmployees from "./components/employees/RegisterEmployees";
 import { ThemeProvider } from "styled-components";
 import theme from './components/clients/ThemeConfig'
+import ProductDetailsAdds from "./components/clients/ProductDetailsAdds";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
               <Route path="/" element={<ClientsHome />} />
               <Route path="/menus" element={<Menus />} />
               <Route path="/menus/:id" element={<ProductDetails />} />
+              <Route path="/menus/adds-on" element={<ProductDetailsAdds />} />
               <Route path="/cart" element={<Cart />} />
               <Route path="/register-or-continue" element={<PageQuestion />} />
               <Route path="/login" element={<Login />} />

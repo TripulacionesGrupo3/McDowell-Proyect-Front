@@ -1,12 +1,13 @@
 import React from 'react';
-import details from '../../assets/images/details.png'
 import '../../assets/clients/productdetails.css'
 import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
-import axios from 'axios';
 import { useState } from 'react';
 import { useCartContext } from '../../context/ShoppingCartContext';
 import ProductsManager from '../../services/products.Api';
+import NavBarMenus from './Navbar_Menus';
+import logoTop from '../../assets/images/single_menu_top.png'
+import { Typography } from '@mui/material';
 
 
 function ProductDetails() {
@@ -18,11 +19,6 @@ function ProductDetails() {
 
 
     useEffect(() => {
-        /*const getProduct = async () => {
-            const response = await axios.get(`${process.env.REACT_APP_API_URL}/products/${id}`);
-            setProduct(response.data);
-        }
-        getProduct();*/
         ProductsManager.getSingleProduct(setProduct, id)
     }, [])
 
@@ -30,14 +26,14 @@ function ProductDetails() {
         const isInCart = context.cart.find(item => item.id_product === product.id_product)
 
         if (isInCart) {
-            const setOneProd = context.cart.map(item => 
+            const setOneProd = context.cart.map(item =>
                 item.id_product === isInCart.id_product ? {
                     ...item, quantity: item.quantity + 1, total: product.price * (item.quantity + 1)
                 } : item
             );
-            context.setCart(setOneProd); 
+            context.setCart(setOneProd);
         } else {
-            
+
             context.cart.push({
                 ...product,
                 total: product.price,
@@ -48,12 +44,12 @@ function ProductDetails() {
 
         const setTotalPrice = context.totalCart.map((item) => {
             return (
-                {   
+                {
                     totalPrice: item.totalPrice + product.price,
                     totalQuantity: item.totalQuantity + 1
                 })
         })
-        
+
         context.setTotalCart(setTotalPrice)
 
     }
@@ -61,43 +57,36 @@ function ProductDetails() {
 
     return (
         <>
-            <div className="containerDetails">
-                <div className='leftContainerDetails'></div>
-                <div className="centerContainerDetails">
-                    <div className='topDetails'>
-                        <img className='detailsTitle' src={details} alt='NOT FOUND' />
-                    </div>
-                    <div className='detailsContainer' key={product.id_product}>
-                        <p className='menu'>{product.name}</p>
+            <div className='containter_single_1'>
+                <NavBarMenus />
 
-                        <div className='centerDetails'>
-                            <img className='detailsMc' src={product.image} alt='NOT FOUND' />
-                            <p className='pDetails'>
-                                {product.description}
-                            </p>
-                        </div>
-                        <p className='menuPrice'>
-                            Precio: {product.price}€
-                        </p>
-                        <p className='menuPrice'>
-                            Total carrito: {context.totalCart[0].totalPrice}€
-                        </p>
-
-                    </div>
-
-                    <div className='bottomMenu'>
-                        <div className='bottomLeftDetails' >
-                            <button className='add' onClick={() => addProduct(product.id_product)}>AÑADIR AL PEDIDO</button>
-                        </div>
-                        <div className='bottomRightDetails'>
-                            <button className='select ' onClick={() => navigate(`/menus`)}>VOLVER A SELECCIÓN</button>
-
-                        </div>
-
-                    </div>
-
+                <div className='text_top'>
+                    <Typography variant='h2' sx={{ fontWeight: "bold", fontSize: "24px" }}>
+                        Menú Burguer
+                    </Typography>
                 </div>
-                <div className='rigthContainerMenu'>
+                <div className='container_logo_single'>
+                    <img src={logoTop} alt={logoTop} className="logo_single" />
+                </div>
+            </div>
+            <div className='containter_custom_menu'>
+                <div className='text_custom_menu'>
+                    <Typography variant='h2' sx={{ fontWeight: "bold", fontSize: "24px" }}>
+                        Personaliza tu Menú
+                    </Typography >
+                    <Typography variant='body1' sx={{ fontWeight: "bold", fontSize: "14px" }}>
+                        Añade o elimina los ingredientes como prefieras
+                    </Typography>
+                </div>
+            </div>
+            <div className='containter_custom_text'>
+                <Typography variant='h2' sx={{ fontWeight: "bold", fontSize: "24px" }} >
+                    ¡Como tú quieras!
+                </Typography>
+                <div className='btn_single'>
+                <Typography variant='body1' sx={{ fontWeight: "bold", fontSize: "14px" }}>
+                    Continuar
+                </Typography>
                 </div>
             </div>
         </>
@@ -106,12 +95,3 @@ function ProductDetails() {
 
 export default ProductDetails;
 
-/*
-                                Hamburguesa de tierna carne de vaca Wagyū, hecha en plancha Jasper a 180ºC para
-                                conseguir el punto exacto.
-                                <br />
-                                Con queso parmesano y queso americano ligeramente ahumado, bacon crispy, lechuga batavia, pomodoro y cebolla morada.
-                                <br />
-                                Todo ello acompañado de nuestras patatas bastón ecológicas cortadas en el día y cocinadas en aceite de oliva.
- 
-*/

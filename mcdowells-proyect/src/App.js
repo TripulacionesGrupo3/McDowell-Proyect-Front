@@ -15,10 +15,13 @@ import { UserProvider } from "./context/User";
 import EmployeeHome from "./components/employees/EmployeeHome";
 import Employees from "./components/employees/Employees";
 import RegisterEmployees from "./components/employees/RegisterEmployees";
+import { ThemeProvider } from "styled-components";
+import theme from './components/clients/ThemeConfig'
 
 function App() {
   return (
     <>
+    <ThemeProvider theme={theme}>
       <BrowserRouter>
         <ShoppingCartProvider>
           <UserProvider>
@@ -33,12 +36,16 @@ function App() {
               <Route path="/finish-order" element={<EmailPage />} />
               <Route path="/see-you-soon" element={<LastPage />} />
               <Route path="/employees-login" element={<EmployeeHome />} />
-              <Route path="/admin/register-employeers"  element={<RegisterEmployees />} />
+              <Route
+                path="/admin/register-employeers"
+                element={<RegisterEmployees />}
+              />
               <Route path="/employees" element={<Employees />} />
             </Routes>
           </UserProvider>
         </ShoppingCartProvider>
       </BrowserRouter>
+      </ThemeProvider>
     </>
   );
 }

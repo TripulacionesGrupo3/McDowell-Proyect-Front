@@ -25,3 +25,10 @@
 .container_empty{
     height: 9vh;
 }
+
+.text_top {
+    display: flex;
+    background-color: #74AF00;
+    padding-bottom: 1rem;
+    justify-content: center;
+}

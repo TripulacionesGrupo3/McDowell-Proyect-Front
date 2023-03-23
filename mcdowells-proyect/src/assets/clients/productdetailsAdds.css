@@ -35,3 +35,9 @@
     padding: 0.5rem;
     width: 25vw;
 }
+
+.check{
+    position: absolute;
+    margin-left: 5rem;
+    margin-top: 5rem;
+}

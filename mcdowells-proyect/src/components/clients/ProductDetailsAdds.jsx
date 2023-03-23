@@ -4,10 +4,14 @@ import '../../assets/clients/productdetailsAdds.css'
 import adds from '../../libs/adds'
 import TaskAltOutlinedIcon from '@mui/icons-material/TaskAltOutlined';
 import { useState } from "react";
+import { useNavigate } from 'react-router-dom';
+
 
 const ProductDetailsAdds = () => {
 
-const [check, setCheck] = useState(false)
+    const [idProd, setIdProd] = useState()
+    const navigate = useNavigate()
+
 
     return <>
         <NavBarMenus />
@@ -20,7 +24,7 @@ const [check, setCheck] = useState(false)
                     Incluido en tu menú, elige uno de ellos
                 </Typography>
             </div>
-            <div className='btn_single_add' >
+            <div className='btn_single_add' onClick={() => navigate("/menus/extras")}>
                 <Typography variant='body1' sx={{ fontWeight: "bold", fontSize: "14px" }}>
                     Continuar
                 </Typography>
@@ -30,14 +34,14 @@ const [check, setCheck] = useState(false)
         <div className='container_adds'>
             {adds.map((product) =>
                 <div className='container_add_details'>
-                    <img src={product.image} alt="auto" onClick={()=> setCheck(!check)}/>
-                    {check && <TaskAltOutlinedIcon sx={{borderRadius: "100px", backgroundColor : "#74AF00"}}/>}
+                    <img src={product.image} alt="auto" onClick={() => setIdProd(product.id)} />
+                    {idProd === product.id ?
+                        (<TaskAltOutlinedIcon sx={{ borderRadius: "100px", backgroundColor: "#74AF00" }}
+                            className="check" />)
+                        : ""}
                 </div>
-
             )}
         </div>
-
-
     </>
 
 }

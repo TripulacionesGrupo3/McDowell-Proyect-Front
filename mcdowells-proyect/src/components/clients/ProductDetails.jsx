@@ -5,7 +5,6 @@ import { useState } from 'react';
 import { useCartContext } from '../../context/ShoppingCartContext';
 import ProductsManager from '../../services/products.Api';
 import NavBarMenus from './Navbar_Menus';
-import logoTop from '../../assets/images/single_menu_top.png'
 import { Typography } from '@mui/material';
 import ingredients from '../../libs/ingredients';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
@@ -59,18 +58,7 @@ function ProductDetails() {
     return (
         <>
             <NavBarMenus />
-            {/* <div className='containter_single_1'>
-                <NavBarMenus />
-
-                <div className='text_top'>
-                    <Typography variant='h2' sx={{ fontWeight: "bold", fontSize: "24px" }}>
-                        Menú Burguer
-                    </Typography>
-                </div>
-                <div className='container_logo_single'>
-                    <img src={logoTop} alt={logoTop} className="logo_single" />
-                </div>
-    </div> */}
+        
             <div className='containter_custom_menu'>
                 <div className='text_custom_menu'>
                     <Typography variant='h2' sx={{ fontWeight: "bold", fontSize: "24px" }}>
@@ -91,7 +79,7 @@ function ProductDetails() {
                     </Typography>
                 </div>
             </div>
-            <div className='containter_custom_menu'>
+            <div className='containter_custom_menu_1'>
                 {ingredients.map((product) =>
                     <div className='container_ingredients' >
                         <div className='ingredients_options'>

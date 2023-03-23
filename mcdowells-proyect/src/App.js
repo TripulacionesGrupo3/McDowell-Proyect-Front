@@ -18,6 +18,7 @@ import RegisterEmployees from "./components/employees/RegisterEmployees";
 import { ThemeProvider } from "styled-components";
 import theme from './components/clients/ThemeConfig'
 import ProductDetailsAdds from "./components/clients/ProductDetailsAdds";
+import MenuExtras from "./components/clients/MenusExtras";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
               <Route path="/menus" element={<Menus />} />
               <Route path="/menus/:id" element={<ProductDetails />} />
               <Route path="/menus/adds-on" element={<ProductDetailsAdds />} />
+              <Route path="/menus/extras" element={<MenuExtras />} />
               <Route path="/cart" element={<Cart />} />
               <Route path="/register-or-continue" element={<PageQuestion />} />
               <Route path="/login" element={<Login />} />

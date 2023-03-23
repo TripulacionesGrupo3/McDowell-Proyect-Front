@@ -15,15 +15,14 @@ import { UserProvider } from "./context/User";
 import EmployeeHome from "./components/employees/EmployeeHome";
 import Employees from "./components/employees/Employees";
 import RegisterEmployees from "./components/employees/RegisterEmployees";
-import { ThemeProvider } from "styled-components";
-import theme from './components/clients/ThemeConfig'
 import ProductDetailsAdds from "./components/clients/ProductDetailsAdds";
 import MenuExtras from "./components/clients/MenusExtras";
+import MenuBebidas from "./components/clients/MenuBebidas";
+import Desserts from "./components/clients/Desserts";
 
 function App() {
   return (
     <>
-    <ThemeProvider theme={theme}>
       <BrowserRouter>
         <ShoppingCartProvider>
           <UserProvider>
@@ -33,6 +32,8 @@ function App() {
               <Route path="/menus/:id" element={<ProductDetails />} />
               <Route path="/menus/adds-on" element={<ProductDetailsAdds />} />
               <Route path="/menus/extras" element={<MenuExtras />} />
+              <Route path="/menus/drinks" element={<MenuBebidas />} />
+              <Route path="/menus/desserts" element={<Desserts />} />
               <Route path="/cart" element={<Cart />} />
               <Route path="/register-or-continue" element={<PageQuestion />} />
               <Route path="/login" element={<Login />} />
@@ -49,7 +50,6 @@ function App() {
           </UserProvider>
         </ShoppingCartProvider>
       </BrowserRouter>
-      </ThemeProvider>
     </>
   );
 }

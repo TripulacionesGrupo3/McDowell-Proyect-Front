@@ -1,23 +1,22 @@
-import NavBarMenus from "./Navbar_Menus";
+import NavBarHelados from "./NavBarHelados"
 import { Typography } from '@mui/material';
 import '../../assets/clients/productdetailsAdds.css'
 import '../../assets/clients/menuExtras.css'
 import { useState } from "react";
-import extras from "../../libs/extras";
+import desserts from "../../libs/desserts";
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import { useNavigate } from 'react-router-dom';
 
-const MenuExtras = () => {
+const Desserts = () => {
 
     const [idProd, setIdProd] = useState()
-    const [color, setColor] = useState("#FFFFFF")
     const navigate = useNavigate()
 
 
 
     return <>
-        <NavBarMenus />
+        <NavBarHelados />
         <div className='container_top_extras'>
             <div className='text_top_add'>
                 <Typography variant='h2' sx={{ fontWeight: "bold", fontSize: "24px" }}>
@@ -27,7 +26,7 @@ const MenuExtras = () => {
                     Añade un complemento por 1,99€
                 </Typography>
             </div>
-            <div className='btn_single_add' onClick={() => navigate("/menus/drinks")} >
+            <div className='btn_single_add'  >
                 <Typography variant='body1' sx={{ fontWeight: "bold", fontSize: "14px" }}>
                     Continuar
                 </Typography>
@@ -35,10 +34,10 @@ const MenuExtras = () => {
         </div>
 
         <div className='containter_custom_menu_1'>
-            {extras.map((product) =>
+            {desserts.map((product) =>
                 <>
                     {idProd !== product.id ?
-                        <div className='container_extras' style={{ backgroundColor: color }}>
+                        <div className='container_extras' style={{ backgroundColor: "#FFFFFF" }}>
                             <div className='ingredients_options'>
                                 <img src={product.image} />
                             </div>
@@ -103,4 +102,4 @@ const MenuExtras = () => {
 }
 
 
-export default MenuExtras
+export default Desserts

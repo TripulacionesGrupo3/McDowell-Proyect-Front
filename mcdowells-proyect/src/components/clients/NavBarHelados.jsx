@@ -2,9 +2,10 @@ import '../../assets/clients/navBar.css'
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Typography } from '@mui/material';
-import logoTop from '../../assets/images/single_menu_top.png'
+import logoHelado from '../../assets/images/top_helados.png'
 
-const NavBarMenus = () => {
+
+const NavBarHelados = () => {
 
 
     return <>
@@ -24,14 +25,14 @@ const NavBarMenus = () => {
 
             <div className='text_top'>
                 <Typography variant='h2' sx={{ fontWeight: "bold", fontSize: "24px" }}>
-                    Menú Burguer
+                    Postres
                 </Typography>
             </div>
             <div className='container_logo_single'>
-                <img src={logoTop} alt={logoTop} className="logo_single" />
+                <img src={logoHelado} alt={logoHelado} className="logo_single" />
             </div>
         </div>
     </>
 }
 
-export default NavBarMenus
+export default NavBarHelados

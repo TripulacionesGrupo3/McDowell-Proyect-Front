@@ -2,9 +2,13 @@ FROM node:18-alpine as build
 WORKDIR /usr/src/app
 COPY package.json ./
 COPY package-lock.json ./
+
+ARG REACT_APP_API_URL
+ENV REACT_APP_API_URL="https://tgjnmxhhmi.eu-central-1.awsapprunner.com/api"
+
 RUN npm ci
 COPY . ./
-ENV REACT_APP_API_URL="http://localhost:8080/api"
+
 RUN npm run build
 
 FROM nginx:latest

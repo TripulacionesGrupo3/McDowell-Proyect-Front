@@ -1,33 +1,17 @@
 import '../../assets/clients/clientshome.css'
-import welcome from '../../assets/images/welcome.png'
-import mcTitle from '../../assets/images/title.png'
-import logo from '../../assets/images/logo.png'
-import React, { useState } from 'react';
+import logo from '../../assets/images/logo_burger.png'
 import { useNavigate } from 'react-router-dom';
-
 
 function ClientsHome() {
     const navigate = useNavigate();
-   
+
     return (
         <>
-            <div className="container">
-                <div className='leftContainer'></div>
-                <div className="centerContainer">
-                    <div className='topDiv'>
-                        <img className= 'welcome' src={welcome} alt=" NOT FOUND" />
-                        <img className='mcTitle' src={mcTitle} alt='NOT FOUND' />
-                    </div>
-                    <div className='centerDiv'>
-                    <img className='logo' src={logo} alt='NOT FOUND' onDoubleClick={()=>navigate('/employees-login')}/>
-                    </div>
-                    <div className='bottomDiv'>
-                        <button className='start' onClick={() => navigate(`/menus`)}>EMPEZAR PEDIDO</button>
-                    </div>
+            <container className="container_menu" >
+                <div className='container_menu_1'>
+                    <img className='logo_menu' src={logo} alt=" NOT FOUND" onClick={() => navigate('/login')}/>
                 </div>
-                <div className='rigthContainer'>
-                </div>
-            </div>
+            </container>
         </>
     )
 }

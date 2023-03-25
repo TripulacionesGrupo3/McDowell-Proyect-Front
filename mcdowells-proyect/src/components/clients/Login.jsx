@@ -1,85 +1,65 @@
 import "../../assets/clients/login.css"
-import email from '../../assets/images/email.png'
+import '../../assets/clients/clientshome.css'
+import logo from '../../assets/images/logo_burger.png'
 import { useNavigate } from 'react-router-dom';
-import { useCartContext } from '../../context/ShoppingCartContext';
-import { useState } from "react";
 import UsersManager from "../../services/user.Api";
-import OrdersManager from "../../services/order.Api";
-import Modal from "../Modal";
 import { useUserContext } from "../../context/User";
+import { useForm } from "react-hook-form";
+import { Typography } from "@mui/material";
+
 
 
 const Login = () => {
     const contextUser = useUserContext()
-    const context = useCartContext()
     const navigate = useNavigate()
+    const { register, handleSubmit, formState: { errors } } = useForm()
 
-    const [userName, setUserName] = useState()
-    const [password, setPassword] = useState()
-    const [loggedIn, setLoggedIn] = useState(false)
-    const [notLoggedIn, setNotLoggedIn] = useState(false)
 
-    const image = 'https://cdn-icons-png.flaticon.com/512/1053/1053188.png?w=740&t=st=1675464717~exp=1675465317~hmac=123970fb6328e4fa8a9eb22784499c906aaddd8cf173382cf6cca075051fc494';
-
-    const LoginUser = async () => {
+    const onSubmit = async (data) => {
         const infoUser = {
-            username: userName,
-            password: password
+            username: data.userName,
+            password: data.password
         }
-        const response = await UsersManager.login(infoUser, setLoggedIn, setNotLoggedIn)
-        if(typeof response !== 'undefined'){
-            contextUser.setUser(response.data)
+        try {
+            const response = await UsersManager.login(infoUser)
+            await contextUser.setUser({...response.data, email : data.userName.toLowerCase()})
+            navigate(`/menus`)
+        } catch (error) {
+            console.log(error)
         }
-    }
-
-    const sendOrder = async () => {
-        const order = context.cart
-        const email = { email: userName.toLowerCase(), id_user: contextUser.user.id_user }
-        await OrdersManager.createOrder(email, order)
-        context.setCart([])
-        context.setTotalCart([{
-            totalPrice: 0,
-            totalQuantity: 0
-        }])
-        contextUser.setUser([])
-        navigate('/see-you-soon')
     }
 
     return <>
-        <div className="containerLogin">
-            <div className='leftContainerLogin'></div>
-            <div className="centerContainerLogin">
-                <div className='topLogin'>
+        <container className="container_menu_login" >
+            <div className='container_image_login' >
+                <img className='logo_menu' src={logo} alt=" NOT FOUND" onClick={()=>navigate('/employees-login')}/>
 
-                    <img className='emailImg' src={email} alt='NOT FOUND' />
-                </div>
-                <div className="centerLogin" >
-                    <div className="centerLogin">
-                        <label className='infoText' for="fname">
-                            ACCEDE A TU CUENTA
-                        </label>
-                        <input className="infoLogin" type="text" placeholder="Correo electrónico" onChange={(e) => setUserName(e.target.value)} required/>
-                        <input className="infoLogin" type="password" placeholder="Contraseña" onChange={(e) => setPassword(e.target.value)} required/>
-                        <button className='btnQuestion' onClick={() => LoginUser()}>ACCEDER</button>
-                        <label className='infoText' for="fname">-------- O --------</label>
-                        <label className="createText" onClick={() => navigate('/register/new-account')}>CREA UNA CUENTA NUEVA</label>
+                <form onSubmit={handleSubmit(onSubmit)} className="container_inputs">
+
+                    <input placeholder="Email" className="input_log" {...register('userName', {
+                        required: true,
+                        pattern: /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/
+                    })} />
+
+
+                    <input type="password" placeholder="Contraseña" className="input_log" {...register('password', {
+                        required: true
+                    })} />
+                    <div className="input_errors">
+                        {errors.userName?.type === 'required' && <p className="p_error">Es necesario rellenar todos los campos</p>}
+                        {errors.userName?.type === 'pattern' && <p className="p_error">Introduzca un email valido</p>}
+                        {errors.password?.type === 'required' && <p className="p_error">Es necesario rellenar todos los campos</p>}
                     </div>
-                </div>
-                <div className='bottonLogin'>
-
-                    <p className='totalBotton'>
-                        <img className='returnBtnLogin' src={image} onClick={() => navigate('/register-or-continue')} />
-
-                        TOTAL: {context.totalCart[0].totalPrice}€
-                    </p>
-
-                </div>
+                    <Typography variant='body1' sx={{ textDecoration: " underline #74AF00" }} className="text_bottom">
+                        ¿Has olvidado tu contraseña?
+                    </Typography>
+                    <button type="submit" className="btn_sendlogin">Entrar</button>
+                </form>
+                <p>--------O--------</p>
+                <button className="btn_sendlogin" onClick={() => navigate("/register/new-account")}>Registrate</button>
             </div>
-            <div className='rigthContainerLogin'></div>
-        </div>
-        {loggedIn && <Modal title={`Bienvenido ${contextUser.user.name.toUpperCase()}`} style={"btnModal"}  text={"Te enviaremos por email el ticket de tu pedido, gracias por tu compra"}
-            route={() => sendOrder()} />}
-        {notLoggedIn && <Modal title={"Ha habido un error"} style={"btnModal"}  text={"Email y/o contraseña no encontrado"} route={() => setNotLoggedIn(false)} />}
+        </container>
+
     </>
 
 }

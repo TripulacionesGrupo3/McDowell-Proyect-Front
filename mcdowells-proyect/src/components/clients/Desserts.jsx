@@ -7,11 +7,46 @@ import desserts from "../../libs/desserts";
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import { useNavigate } from 'react-router-dom';
+import { useCartContext } from '../../context/ShoppingCartContext';
+import NavBarBottom from './NavBarBotttom';
 
 const Desserts = () => {
 
     const [idProd, setIdProd] = useState()
     const navigate = useNavigate()
+    const [total, setTotal] = useState(0)
+    const context = useCartContext();
+
+    const addToTotal = (id, price) => {
+        const setTotalPrice = context.totalCart.map((item) => {
+            return (
+                {
+                    totalPrice: item.totalPrice + price,
+                    totalQuantity: item.totalQuantity
+                })
+        })
+        context.setTotalCart(setTotalPrice)
+        setIdProd(id)
+        setTotal(total + price)
+    }
+
+    const removeToTotal = async (price) => {
+        if (total !== 0) {
+            setTotal(total - price)
+        }
+        if (total > 0) {
+            
+            const setTotalPrice = context.totalCart.map((item) => {
+                return (
+                    {
+                        totalPrice: item.totalPrice - price,
+                        totalQuantity: item.totalQuantity
+                    })
+            })
+            context.setTotalCart(setTotalPrice)
+            setIdProd(null)
+        }
+    }
 
 
 
@@ -39,21 +74,21 @@ const Desserts = () => {
                     {idProd !== product.id ?
                         <div className='container_extras' style={{ backgroundColor: "#FFFFFF" }}>
                             <div className='ingredients_options'>
-                                <img src={product.image} />
+                                <img src={product.image} alt={"auto"} />
                             </div>
 
                             <div className='extras_options'>
                                 <Typography variant='h2' sx={{ fontWeight: "bold", fontSize: "20px" }}>
                                     {product.title}
                                 </Typography>
-                                <button className='btn_ingredients' onClick={() => setIdProd(product.id)}>
-                                    <AddCircleOutlineIcon />
+                                <button className='btn_ingredients' >
+                                    <AddCircleOutlineIcon onClick={() => addToTotal(product.id, product.price)}/>
                                     <Typography variant='body1' sx={{ fontWeight: "bold", fontSize: "14px" }}>
                                         Añadir
                                     </Typography>
                                 </button>
-                                <button className='btn_ingredients' onClick={() => setIdProd(null)}>
-                                    <RemoveCircleOutlineIcon />
+                                <button className='btn_ingredients' >
+                                    <RemoveCircleOutlineIcon onClick={() => removeToTotal(product.price)}/>
                                     <Typography variant='body1' sx={{ fontWeight: "bold", fontSize: "14px" }}>
                                         Quitar
                                     </Typography>
@@ -68,21 +103,21 @@ const Desserts = () => {
                         :
                         <div className='container_extras' style={{ backgroundColor: "#F3FFE3" }}>
                             <div className='ingredients_options'>
-                                <img src={product.image} />
+                                <img src={product.image} alt={"auto"} />
                             </div>
 
                             <div className='extras_options'>
                                 <Typography variant='h2' sx={{ fontWeight: "bold", fontSize: "20px" }}>
                                     {product.title}
                                 </Typography>
-                                <button className='btn_ingredients' onClick={() => setIdProd(product.id)}>
-                                    <AddCircleOutlineIcon />
+                                <button className='btn_ingredients' >
+                                    <AddCircleOutlineIcon onClick={() => addToTotal(product.id, product.price)} />
                                     <Typography variant='body1' sx={{ fontWeight: "bold", fontSize: "14px" }}>
                                         Añadir
                                     </Typography>
                                 </button>
-                                <button className='btn_ingredients' onClick={() => setIdProd(null)}>
-                                    <RemoveCircleOutlineIcon />
+                                <button className='btn_ingredients' >
+                                    <RemoveCircleOutlineIcon onClick={() => removeToTotal(product.price)}/>
                                     <Typography variant='body1' sx={{ fontWeight: "bold", fontSize: "14px" }}>
                                         Quitar
                                     </Typography>
@@ -97,6 +132,7 @@ const Desserts = () => {
                 </>
             )}
         </div>
+        <NavBarBottom />
     </>
 
 }

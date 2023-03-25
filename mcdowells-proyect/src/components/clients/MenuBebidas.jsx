@@ -7,10 +7,11 @@ import { useState } from "react";
 import drinks from "../../libs/bebidas";
 import { useNavigate } from 'react-router-dom';
 import TaskAltOutlinedIcon from '@mui/icons-material/TaskAltOutlined';
+import NavBarBottom from './NavBarBotttom';
+
 const MenuBebidas = () => {
 
     const [idProd, setIdProd] = useState()
-    const [color, setColor] = useState("#FFFFFF")
     const navigate = useNavigate()
 
 
@@ -51,7 +52,7 @@ const MenuBebidas = () => {
 
         </div>
 
-
+        <NavBarBottom />
     </>
 
 }

@@ -7,12 +7,46 @@ import extras from "../../libs/extras";
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import { useNavigate } from 'react-router-dom';
+import { useCartContext } from '../../context/ShoppingCartContext';
+import NavBarBottom from './NavBarBotttom';
 
 const MenuExtras = () => {
 
     const [idProd, setIdProd] = useState()
     const [color, setColor] = useState("#FFFFFF")
+    const [total, setTotal] = useState(0)
     const navigate = useNavigate()
+    const context = useCartContext();
+    const price = 1.99
+    const addToTotal = (id) => {
+        const setTotalPrice = context.totalCart.map((item) => {
+            return (
+                {
+                    totalPrice: item.totalPrice + price,
+                    totalQuantity: item.totalQuantity
+                })
+        })
+        context.setTotalCart(setTotalPrice)
+        setIdProd(id)
+        setTotal(total + price)
+    }
+
+    const removeToTotal = async () => {
+        if(total !==0){
+         setTotal(total - price)
+        }
+        if (total > 0) {
+            const setTotalPrice = context.totalCart.map((item) => {
+                return (
+                    {
+                        totalPrice: item.totalPrice - price,
+                        totalQuantity: item.totalQuantity
+                    })
+            })
+            context.setTotalCart(setTotalPrice)
+            setIdProd(null)
+        }
+    }
 
 
 
@@ -47,14 +81,14 @@ const MenuExtras = () => {
                                 <Typography variant='h2' sx={{ fontWeight: "bold", fontSize: "20px" }}>
                                     {product.title}
                                 </Typography>
-                                <button className='btn_ingredients' onClick={() => setIdProd(product.id)}>
-                                    <AddCircleOutlineIcon />
+                                <button className='btn_ingredients' >
+                                    <AddCircleOutlineIcon onClick={() => addToTotal(product.id)}/>
                                     <Typography variant='body1' sx={{ fontWeight: "bold", fontSize: "14px" }}>
                                         Añadir
                                     </Typography>
                                 </button>
-                                <button className='btn_ingredients' onClick={() => setIdProd(null)}>
-                                    <RemoveCircleOutlineIcon />
+                                <button className='btn_ingredients' >
+                                    <RemoveCircleOutlineIcon onClick={() => removeToTotal()}/>
                                     <Typography variant='body1' sx={{ fontWeight: "bold", fontSize: "14px" }}>
                                         Quitar
                                     </Typography>
@@ -76,13 +110,13 @@ const MenuExtras = () => {
                                 <Typography variant='h2' sx={{ fontWeight: "bold", fontSize: "20px" }}>
                                     {product.title}
                                 </Typography>
-                                <button className='btn_ingredients' onClick={() => setIdProd(product.id)}>
+                                <button className='btn_ingredients' onClick={() => addToTotal(product.id)}>
                                     <AddCircleOutlineIcon />
                                     <Typography variant='body1' sx={{ fontWeight: "bold", fontSize: "14px" }}>
                                         Añadir
                                     </Typography>
                                 </button>
-                                <button className='btn_ingredients' onClick={() => setIdProd(null)}>
+                                <button className='btn_ingredients' onClick={() => removeToTotal(null)}>
                                     <RemoveCircleOutlineIcon />
                                     <Typography variant='body1' sx={{ fontWeight: "bold", fontSize: "14px" }}>
                                         Quitar
@@ -98,6 +132,7 @@ const MenuExtras = () => {
                 </>
             )}
         </div>
+        <NavBarBottom />
     </>
 
 }

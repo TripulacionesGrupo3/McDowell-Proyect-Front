@@ -14,8 +14,6 @@ const Register = () => {
     const { register, handleSubmit, formState: { errors } } = useForm()
 
 
-
-
     const onSubmit = async (data) => {
         const userInformation = {
             username: data.userName,

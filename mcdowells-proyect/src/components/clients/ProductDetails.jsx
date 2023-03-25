@@ -9,56 +9,54 @@ import { Typography } from '@mui/material';
 import ingredients from '../../libs/ingredients';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
+import NavBarBottom from './NavBarBotttom';
 
 function ProductDetails() {
 
     const navigate = useNavigate();
     const [product, setProduct] = useState([]);
+    const [total, setTotal] = useState(0)
     const { id } = useParams();
     const context = useCartContext();
-
+    const price = 0.50
 
     useEffect(() => {
         ProductsManager.getSingleProduct(setProduct, id)
     }, [])
 
-    const addProduct = () => {
-        const isInCart = context.cart.find(item => item.id_product === product.id_product)
-
-        if (isInCart) {
-            const setOneProd = context.cart.map(item =>
-                item.id_product === isInCart.id_product ? {
-                    ...item, quantity: item.quantity + 1, total: product.price * (item.quantity + 1)
-                } : item
-            );
-            context.setCart(setOneProd);
-        } else {
-
-            context.cart.push({
-                ...product,
-                total: product.price,
-                quantity: 1
-
-            })
-        }
-
+    const addToTotal = () => {
         const setTotalPrice = context.totalCart.map((item) => {
             return (
                 {
-                    totalPrice: item.totalPrice + product.price,
-                    totalQuantity: item.totalQuantity + 1
+                    totalPrice: item.totalPrice + price,
+                    totalQuantity: item.totalQuantity
                 })
         })
-
         context.setTotalCart(setTotalPrice)
+        setTotal(total + price)
+    }
 
+    const removeToTotal = async () => {
+        if (total !== 0) {
+            setTotal(total - price)
+        }
+        if (total > 0) {
+            const setTotalPrice = context.totalCart.map((item) => {
+                return (
+                    {
+                        totalPrice: item.totalPrice - price,
+                        totalQuantity: item.totalQuantity
+                    })
+            })
+            context.setTotalCart(setTotalPrice)
+        }
     }
 
 
     return (
         <>
             <NavBarMenus />
-        
+
             <div className='containter_custom_menu'>
                 <div className='text_custom_menu'>
                     <Typography variant='h2' sx={{ fontWeight: "bold", fontSize: "24px" }}>
@@ -73,7 +71,7 @@ function ProductDetails() {
                 <Typography variant='h2' sx={{ fontWeight: "bold", fontSize: "24px" }} >
                     ¡Como tú quieras!
                 </Typography>
-                <div className='btn_single' onClick={()=> navigate("/menus/adds-on")}>
+                <div className='btn_single' onClick={() => navigate("/menus/adds-on")}>
                     <Typography variant='body1' sx={{ fontWeight: "bold", fontSize: "14px" }}>
                         Continuar
                     </Typography>
@@ -81,7 +79,7 @@ function ProductDetails() {
             </div>
             <div className='containter_custom_menu_1'>
                 {ingredients.map((product) =>
-                    <div className='container_ingredients' >
+                    <div className='container_ingredients' key={product.id_product} >
                         <div className='ingredients_options'>
                             <img src={product.image} />
                         </div>
@@ -89,13 +87,13 @@ function ProductDetails() {
                             <Typography variant='h2' sx={{ fontWeight: "bold", fontSize: "24px" }}>
                                 {product.title}
                             </Typography>
-                            <button className='btn_ingredients'>
+                            <button className='btn_ingredients' onClick={() => addToTotal()}>
                                 <AddCircleOutlineIcon />
                                 <Typography variant='body1' sx={{ fontWeight: "bold", fontSize: "14px" }}>
                                     Añadir
                                 </Typography>
                             </button>
-                            <button className='btn_ingredients'>
+                            <button className='btn_ingredients' onClick={() => removeToTotal()}>
                                 <RemoveCircleOutlineIcon />
                                 <Typography variant='body1' sx={{ fontWeight: "bold", fontSize: "14px" }}>
                                     Quitar
@@ -104,12 +102,14 @@ function ProductDetails() {
                         </div>
                         <div className='total_ingredients_options'>
                             <Typography variant='body1' sx={{ fontWeight: "bold", fontSize: "14px" }}>
-                                + 0.00€
+                                + 0.50 €
                             </Typography>
                         </div>
                     </div>
                 )}
+
             </div>
+            <NavBarBottom />
         </>
     )
 }

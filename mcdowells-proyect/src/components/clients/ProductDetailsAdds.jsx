@@ -5,7 +5,7 @@ import adds from '../../libs/adds'
 import TaskAltOutlinedIcon from '@mui/icons-material/TaskAltOutlined';
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
-
+import NavBarBottom from './NavBarBotttom';
 
 const ProductDetailsAdds = () => {
 
@@ -42,6 +42,7 @@ const ProductDetailsAdds = () => {
                 </div>
             )}
         </div>
+        <NavBarBottom />
     </>
 
 }

@@ -2,8 +2,6 @@ import "../../assets/clients/login.css"
 import '../../assets/clients/clientshome.css'
 import logo from '../../assets/images/logo_burger.png'
 import { useNavigate } from 'react-router-dom';
-import { useCartContext } from '../../context/ShoppingCartContext';
-import { useState } from "react";
 import UsersManager from "../../services/user.Api";
 import { useUserContext } from "../../context/User";
 import { useForm } from "react-hook-form";
@@ -13,7 +11,6 @@ import { Typography } from "@mui/material";
 
 const Login = () => {
     const contextUser = useUserContext()
-    const context = useCartContext()
     const navigate = useNavigate()
     const { register, handleSubmit, formState: { errors } } = useForm()
 
@@ -33,8 +30,8 @@ const Login = () => {
     }
 
     return <>
-        <container className="container_menu_login">
-            <div className='container_image_login'>
+        <container className="container_menu_login" >
+            <div className='container_image_login' >
                 <img className='logo_menu' src={logo} alt=" NOT FOUND" />
 
                 <form onSubmit={handleSubmit(onSubmit)} className="container_inputs">

@@ -19,7 +19,7 @@ const ModalBurger = () => {
         <NavBar />
         <div className='container_modal_b'>
             <div className='container_divs'>
-                <img src={burger} className="image_burger" onClick={() => navigate(`/menus/1`)}/>
+                <img src={burger} className="image_burger" onClick={() => navigate(`/menus/2`)} />
                 <img src={vegan} className="image_burger" />
                 <img src={chicken} className="image_burger" />
 

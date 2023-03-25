@@ -13,7 +13,7 @@ import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlin
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-
+import ModalBurger from './ModalBurgers';
 
 function Menus() {
     const navigate = useNavigate();
@@ -21,12 +21,43 @@ function Menus() {
     const [showModal, setShowModal] = useState(false)
     const context = useCartContext();
 
+
     useEffect(() => {
 
         ProductsManager.getAllProducts(setProducts)
 
     }, [])
+    const addProduct = (id, product) => {
+        const isInCart = context.cart.find(item => item.id_product === id)
 
+        if (isInCart) {
+            const setOneProd = context.cart.map(item =>
+                item.id_product === isInCart.id_product ? {
+                    ...item, quantity: item.quantity + 1, total: product.price * (item.quantity + 1)
+                } : item
+            );
+            context.setCart(setOneProd);
+             navigate("/menus/selection")
+        } else {
+
+            context.cart.push({
+                ...product,
+                total: product.price,
+                quantity: 1
+
+            })
+             navigate("/menus/selection")
+        }
+        const setTotalPrice = context.totalCart.map((item) => {
+            return (
+                {   
+                    totalPrice: item.totalPrice + product.price,
+                    totalQuantity: item.totalQuantity + 1
+                })
+        })
+        
+        context.setTotalCart(setTotalPrice)
+    }
 
     return (
         <>
@@ -37,12 +68,12 @@ function Menus() {
 
                     <div key={product.id_product} className='menuContainer'>
                         {product.id_product === 2 && <img className='mcBig' src={menu} alt='NOT FOUND'
-                            onClick={() => navigate("/menus/selection")}
-                        // onClick={() => navigate(`/menus/${product.id_product}`)}
+                            onClick={() => addProduct(product.id_product, product)}
                         />}
                         {product.id_product === 1 && <img className='mcBig' src={menuJr} alt='NOT FOUND'
-                            onClick={() => navigate(`/menus/${product.id_product}`)}
+                            onClick={() => addProduct(product.id_product, product)}
                         />}
+                        {showModal && <ModalBurger idProduct={products.id_product} />}
                     </div>
 
                 )}

@@ -7,7 +7,7 @@ function ClientsHome() {
 
     return (
         <>
-            <container className="container_menu">
+            <container className="container_menu" >
                 <div className='container_menu_1'>
                     <img className='logo_menu' src={logo} alt=" NOT FOUND" onClick={() => navigate('/login')}/>
                 </div>

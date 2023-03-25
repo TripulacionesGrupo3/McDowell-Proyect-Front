@@ -49,3 +49,10 @@
     align-items: center;
     gap: 1rem;
 }
+
+.containter_btn_reg{
+    display: flex;
+    width: 70%;
+    gap: 1rem;
+    justify-content: center;
+}

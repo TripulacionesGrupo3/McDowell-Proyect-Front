@@ -22,7 +22,7 @@ const Login = () => {
         }
         try {
             const response = await UsersManager.login(infoUser)
-            await contextUser.setUser(response.data)
+            await contextUser.setUser({...response.data, email : data.userName.toLowerCase()})
             navigate(`/menus`)
         } catch (error) {
             console.log(error)
@@ -32,7 +32,7 @@ const Login = () => {
     return <>
         <container className="container_menu_login" >
             <div className='container_image_login' >
-                <img className='logo_menu' src={logo} alt=" NOT FOUND" />
+                <img className='logo_menu' src={logo} alt=" NOT FOUND" onClick={()=>navigate('/employees-login')}/>
 
                 <form onSubmit={handleSubmit(onSubmit)} className="container_inputs">
 

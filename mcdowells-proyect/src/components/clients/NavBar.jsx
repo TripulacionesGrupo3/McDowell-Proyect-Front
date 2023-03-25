@@ -3,8 +3,10 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Typography } from '@mui/material';
 import logoNavBar from '../../assets/images/logo_navbar.png'
+import { useUserContext } from "../../context/User";
 
 const NavBar = () => {
+    const contextUser = useUserContext()
 
     return <>
         <div className='image_nav'>
@@ -18,7 +20,7 @@ const NavBar = () => {
             </div>
             <div className='container_navBar_text'>
                 <Typography variant='body1'>
-                    Hola
+                    Hola {contextUser.user.name}
                 </Typography>
             </div>
         </div>

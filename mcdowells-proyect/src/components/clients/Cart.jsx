@@ -1,53 +1,41 @@
 import React from 'react';
-import resumen from '../../assets/images/resumen.png'
-import pedido from '../../assets/images/resumen2.png'
 import '../../assets/clients/cart.css'
 import { useNavigate } from 'react-router-dom';
 import { useCartContext } from '../../context/ShoppingCartContext';
-
-
-
+import { useUserContext } from "../../context/User";
+import NavBar from './NavBar';
+import { Typography } from '@mui/material';
+import NavBarBottom from './NavBarBotttom';
+import papelCero from "../../assets/images/papel_cero.png"
+import OrdersManager from "../../services/order.Api";
 
 function Cart() {
     const navigate = useNavigate();
     const context = useCartContext();
-    
+    const contextUser = useUserContext()
 
-
-    const addProduct = (id) => {
-
-       const isInCart = context.cart.find(item => item.id_product === id)
-       
-        if (isInCart) {
-            const setOneProd = context.cart.map(item =>
-                item.id_product === isInCart.id_product ? {
-                    ...isInCart,
-                    quantity: isInCart.quantity + 1,
-                    total: isInCart.price * (isInCart.quantity + 1)
-                } : item
-            );
-            context.setCart(setOneProd);
-        }
-
-        const setTotalPrice = context.totalCart.map((item) => {
-            return (
-                {
-                    totalPrice: item.totalPrice + isInCart.price,
-                    totalQuantity: item.totalQuantity + 1
-                })
-        })
-        context.setTotalCart(setTotalPrice)
-
+    const sendOrder = async () => {
+        const order = context.cart
+        const email = { email: contextUser.user.email, id_user: contextUser.user.id_user }
+        await OrdersManager.createOrder(email, order)
+        context.setCart([])
+        context.setTotalCart([{
+            totalPrice: 0,
+            totalQuantity: 0
+        }])
+        contextUser.setUser([])
+        navigate('/see-you-soon')
     }
 
-    const deleteProduct = (id) => {
+    //enviar pedido
+   /* const deleteProduct = (id) => {
         const isInCart = context.cart.find(item => item.id_product === id)
 
         if (isInCart.quantity === 1) {
 
-            const setDeleteProd = context.cart.filter(item => isInCart.id_product !== item.id_product);         
+            const setDeleteProd = context.cart.filter(item => isInCart.id_product !== item.id_product);
             context.setCart(setDeleteProd);
-    
+
         } else {
 
             const setDeleteOne = context.cart.map(item =>
@@ -68,51 +56,66 @@ function Cart() {
         })
         context.setTotalCart(setTotalPrice)
 
-    }
+    } */
 
 
     return (
         <>
-            <div className="containerCart">
-                <div className='leftContainerCart'></div>
-                <div className="centerContainerCart">
-                    <div className='topCart'>
-                        <img className='resumenimg' src={resumen} alt='NOT FOUND' />
-                        <img className='pedidoimg' src={pedido} alt='NOT FOUND' />
+            <NavBar />
+            <div className='container_cart'>
+                <div className='containert_ticket'>
+                    <div className='container_title_ticket'>
+                        <Typography variant='h2' sx={{ fontWeight: "bold", fontSize: "24px" }}>
+                            Menu Burger
+                        </Typography>
+                        <Typography variant='body1' sx={{ fontSize: "14px" }}>
+                            13.50€
+                        </Typography>
+                  
                     </div>
-                    <div className='centerCart'>
-                        {context.cart.map((product) => //Hacemos el map sobre el context, lo que hay en el carrito y asi evitamos la llamada
-
-                            <div className='topCenterCart' key={product.id_product}>
-                                <div>
-                                    <p className='menuTitle'>{product.name}</p>
-                                </div>
-
-                                <div className='topCenterCartDiv'>
-                                    <img className='mcJrCart' src={product.image} alt='NOT FOUND' />
-                                    <button className='menos' onClick={() => deleteProduct(product.id_product)} disabled={product.quantity === 0 ? true : false}>-</button>
-                                    <div className='cantidad'>{product.quantity}</div>
-                                    <button className='mas' onClick={() => addProduct(product.id_product)}>+</button>
-                                    <div className='precioUd'>{product.price}€</div>
-                                    <div className='precioTotMen'>{product.total}€</div>
-                                </div>
-
-                            </div>)}
-
-                        <p className='totalCart'> TOTAL: {context.totalCart[0].totalPrice}€ </p>
-                    </div>
-                    <div className='bottomCart'>
-                        <button className='resumeCart' onClick={() => navigate(`/menus`)}>
-                            REANUDAR PEDIDO
-                        </button>
-                        <button className='finishCart' onClick={() => navigate(`/register-or-continue`)}>
-                            FINALIZAR PEDIDO
-                        </button>
+                   
+                    <div className='containter_text_ticket'>
+                        <div className='text_ticket'>
+                            <Typography variant='body1' sx={{ fontSize: "14px" }}>
+                                Extra de queso
+                            </Typography>
+                            <Typography variant='body1' sx={{ fontSize: "14px" }}>
+                                Refresco
+                            </Typography>
+                            <Typography variant='body1' sx={{ fontSize: "14px" }}>
+                                Patatas Normales
+                            </Typography>
+                        </div>
+                        <div className='text_ticket'>
+                            <Typography variant='body1' sx={{ fontSize: "14px" }}>
+                                x1
+                            </Typography>
+                        </div>
+                        <div className='text_ticket'>
+                            <Typography variant='body1' sx={{ fontSize: "14px" }}>
+                                0.50€
+                            </Typography>
+                        </div>
                     </div>
                 </div>
-                <div className='rigthContainerMenu'>
+                <div className='container_btn_cart'>
+                    <div className='btn_cart' style={{backgroundColor : "#D5D5D5"}} onClick={()=>sendOrder()}>
+                        <Typography variant='body1' sx={{ fontWeight: "bold", fontSize: "14px" }}>
+                            Finalizar
+                        </Typography>
+                    </div>
+                    <div className='btn_cart' onClick={()=>navigate("/menus")}>
+                        <Typography variant='body1' sx={{ fontWeight: "bold", fontSize: "14px" }}>
+                            Seguir Comprando
+                        </Typography>
+                    </div>
                 </div>
-    </div>  
+                <div className='container_btn_cart'>
+                    <img src={papelCero} alt={papelCero} />
+                </div>
+
+            </div>
+            <NavBarBottom />
         </>
     )
 }

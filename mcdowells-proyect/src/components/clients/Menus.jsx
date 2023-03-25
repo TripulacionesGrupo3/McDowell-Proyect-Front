@@ -67,10 +67,10 @@ function Menus() {
                 {products.map((product) =>
 
                     <div key={product.id_product} className='menuContainer'>
-                        {product.id_product === 2 && <img className='mcBig' src={menu} alt='NOT FOUND'
+                        {product.id_product === 1 && <img className='mcBig' src={menu} alt='NOT FOUND'
                             onClick={() => addProduct(product.id_product, product)}
                         />}
-                        {product.id_product === 1 && <img className='mcBig' src={menuJr} alt='NOT FOUND'
+                        {product.id_product === 2 && <img className='mcBig' src={menuJr} alt='NOT FOUND'
                             onClick={() => addProduct(product.id_product, product)}
                         />}
                         {showModal && <ModalBurger idProduct={products.id_product} />}

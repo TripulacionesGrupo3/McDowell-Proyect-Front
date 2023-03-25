@@ -61,7 +61,7 @@ const Desserts = () => {
                     Añade un complemento por 1,99€
                 </Typography>
             </div>
-            <div className='btn_single_add'  >
+            <div className='btn_single_add' onClick={()=>navigate("/cart")} >
                 <Typography variant='body1' sx={{ fontWeight: "bold", fontSize: "14px" }}>
                     Continuar
                 </Typography>

@@ -1,5 +1,6 @@
 .container_modal_b {
     display: flex;
+    justify-content: center;
 }
 
 .image_burger {

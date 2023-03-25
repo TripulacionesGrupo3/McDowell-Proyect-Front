@@ -2,13 +2,12 @@ import "../../assets/clients/login.css"
 import '../../assets/clients/clientshome.css'
 import logo from '../../assets/images/logo_burger.png'
 import { useNavigate } from 'react-router-dom';
-import { useState } from "react";
 import UsersManager from "../../services/user.Api";
 import { useUserContext } from "../../context/User";
 import { useForm } from "react-hook-form";
 
 const Register = () => {
-   
+
     const navigate = useNavigate()
     const contextUser = useUserContext()
     const { register, handleSubmit, formState: { errors } } = useForm()
@@ -22,9 +21,9 @@ const Register = () => {
         }
         try {
             const response = await UsersManager.register(userInformation)
-            await contextUser.setUser(response.data)
+            await contextUser.setUser({...response.data, email : data.userName.toLowerCase()})
             navigate(`/menus`)
-        }catch(e){
+        } catch (e) {
             console.log(e)
         }
     }
@@ -50,7 +49,11 @@ const Register = () => {
                         {errors.userName?.type === 'pattern' && <p className="p_error">Introduzca un email valido</p>}
                         {errors.password?.type === 'required' && <p className="p_error">Es necesario rellenar todos los campos</p>}
                     </div>
-                    <button type="submit" className="btn_sendlogin">Registrarse</button>
+                    <div className="containter_btn_reg">
+                        <button className="btn_sendlogin" onClick={()=>navigate("/login")}>Volver</button>
+                        <button type="submit" className="btn_sendlogin">Registrarse</button>
+
+                    </div>
                 </form>
             </div>
         </container>

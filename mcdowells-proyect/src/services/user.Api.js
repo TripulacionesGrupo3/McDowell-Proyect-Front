@@ -1,33 +1,29 @@
 import axios from "axios";
 
 class UsersManager {
-  static async login(infoUser, setLoggedIn, setNotLoggedIn) {
+  static async login(infoUser) {
     let response;
     try {
       response = await axios.post(
         `${process.env.REACT_APP_API_URL}/users/signin`,
         infoUser
       );
-      setLoggedIn(true);
     } catch (error) {
-      setNotLoggedIn(true);
     }
-    return (setLoggedIn, setNotLoggedIn, response)
+    return (response)
   }
 
-  static async register(userInformation, setCreated, setNotCreated, setErrors) {
+  static async register(userInformation) {
     let response;
     try {
       response = await axios.post(
         `${process.env.REACT_APP_API_URL}/users/register`,
         userInformation
       );
-      setCreated(true);
     } catch (error) {
-      setErrors(error.response.data.errorsMsg);
-      setNotCreated(true);
+      
     }
-    return (setCreated, setNotCreated, setErrors, response)
+    return (response)
   }
 
   static async registerEmployees(infoUser, setCreated, setNotCreated,setErrors){

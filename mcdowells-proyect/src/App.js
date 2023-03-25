@@ -19,6 +19,7 @@ import ProductDetailsAdds from "./components/clients/ProductDetailsAdds";
 import MenuExtras from "./components/clients/MenusExtras";
 import MenuBebidas from "./components/clients/MenuBebidas";
 import Desserts from "./components/clients/Desserts";
+import ModalBurger from "./components/clients/ModalBurgers"
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
             <Routes>
               <Route path="/" element={<ClientsHome />} />
               <Route path="/menus" element={<Menus />} />
+              <Route path="/menus/selection" element={<ModalBurger />} />
               <Route path="/menus/:id" element={<ProductDetails />} />
               <Route path="/menus/adds-on" element={<ProductDetailsAdds />} />
               <Route path="/menus/extras" element={<MenuExtras />} />

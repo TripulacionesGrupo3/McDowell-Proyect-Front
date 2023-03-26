@@ -1,0 +1,65 @@
+@media (max-width:1700px) {}
+
+@media (max-width:800px) {}
+
+@media (max-width:400px) {
+
+    .containter_single_1 {
+        background-color: #74AF00;
+        height: 32vh;
+    }
+
+    .container_navBar {
+        background-color: #74AF00;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .container_navBar_text {
+        display: flex;
+        padding-top: 2.5rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        padding-bottom: 1rem;
+    }
+
+    .text_top {
+        display: flex;
+        background-color: #74AF00;
+        padding-bottom: 1rem;
+        justify-content: center;
+    }
+
+    .container_logo_single {
+        display: flex;
+    }
+
+    .image_logo_nav_b {
+        position: absolute;
+        width: 38%;
+        margin-top: 9rem;
+        z-index: 1;
+        margin-right: -15%;
+    }
+
+    .image_logo_nav_p {
+        position: absolute;
+        width: 38%;
+        margin-left: -23%;
+        margin-top: 9rem;
+        margin-top: 39%;
+        width: 38%;
+    }
+
+    .image_nav {
+        display: flex;
+        justify-content: center;
+    }
+
+    .image_logo_nav_h {
+        position: absolute;
+        width: 38%;
+        margin-top: 9rem;
+    }
+}

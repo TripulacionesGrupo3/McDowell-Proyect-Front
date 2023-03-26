@@ -1,14 +1,17 @@
-import '../../assets/clients/navBar.css'
+import '../../assets/clients/navBarMenu.css'
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Typography } from '@mui/material';
-import logoHelado from '../../assets/images/top_helados.png'
-
+import logoTop from '../../assets/images/top_single_menu.png'
+import helados from '../../assets/images/helados_top.png'
 
 const NavBarHelados = () => {
 
 
     return <>
+        <div className='image_nav'>
+            <img src={helados} alt={helados} className="image_logo_nav_h" />
+        </div>
         <div className='containter_single_1'>
             <div className='container_navBar'>
                 <div className='container_navBar_text'>
@@ -29,7 +32,7 @@ const NavBarHelados = () => {
                 </Typography>
             </div>
             <div className='container_logo_single'>
-                <img src={logoHelado} alt={logoHelado} className="logo_single" />
+                <img src={logoTop} alt={logoTop} className="logo_single" />
             </div>
         </div>
     </>

@@ -8,26 +8,31 @@ class UsersManager {
         `${process.env.REACT_APP_API_URL}/users/signin`,
         infoUser
       );
-    } catch (error) {
-    }
-    return (response)
+    } catch (error) {}
+    return response;
   }
 
-  static async register(userInformation) {
+  static async register(userInformation, setErrorLog, setLog) {
     let response;
     try {
       response = await axios.post(
         `${process.env.REACT_APP_API_URL}/users/register`,
         userInformation
       );
+      setLog(true)
     } catch (error) {
-      
+      setErrorLog(error.response.data.errorsMsg);
     }
-    return (response)
+    return response;
   }
 
-  static async registerEmployees(infoUser, setCreated, setNotCreated,setErrors){
-    let response
+  static async registerEmployees(
+    infoUser,
+    setCreated,
+    setNotCreated,
+    setErrors
+  ) {
+    let response;
     try {
       response = await axios.post(
         `${process.env.REACT_APP_API_URL}/users/register-employeers`,
@@ -38,19 +43,19 @@ class UsersManager {
       setErrors(error.response.data.errorsMsg);
       setNotCreated(true);
     }
-    return (setCreated, setNotCreated, setErrors, response)
+    return setCreated, setNotCreated, setErrors, response;
   }
 
-  static getAccess(setAccess,id_user){
+  static getAccess(setAccess, id_user) {
     const getAccess = async () => {
-      const response = await axios.get(`${process.env.REACT_APP_API_URL}/worker/${id_user}`);
+      const response = await axios.get(
+        `${process.env.REACT_APP_API_URL}/worker/${id_user}`
+      );
       setAccess(response.data[0].state);
-    }
+    };
     getAccess();
-    return setAccess
+    return setAccess;
   }
 }
-
-
 
 export default UsersManager;

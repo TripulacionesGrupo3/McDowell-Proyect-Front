@@ -23,7 +23,7 @@ function Cart() {
             totalPrice: 0,
             totalQuantity: 0
         }])
-        contextUser.setUser([])
+        
         navigate('/see-you-soon')
     }
 
@@ -101,7 +101,7 @@ function Cart() {
                 <div className='container_btn_cart'>
                     <div className='btn_cart' style={{backgroundColor : "#D5D5D5"}} onClick={()=>sendOrder()}>
                         <Typography variant='body1' sx={{ fontWeight: "bold", fontSize: "14px" }}>
-                            Finalizar
+                            Pagar
                         </Typography>
                     </div>
                     <div className='btn_cart' onClick={()=>navigate("/menus")}>

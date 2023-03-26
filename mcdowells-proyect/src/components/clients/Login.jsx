@@ -6,12 +6,14 @@ import UsersManager from "../../services/user.Api";
 import { useUserContext } from "../../context/User";
 import { useForm } from "react-hook-form";
 import { Typography } from "@mui/material";
+import { useState } from "react";
 
 
 
 const Login = () => {
     const contextUser = useUserContext()
     const navigate = useNavigate()
+    const [errorLog, setErrorLog] = useState(null)
     const { register, handleSubmit, formState: { errors } } = useForm()
 
 
@@ -20,13 +22,15 @@ const Login = () => {
             username: data.userName,
             password: data.password
         }
-        try {
-            const response = await UsersManager.login(infoUser)
-            await contextUser.setUser({...response.data, email : data.userName.toLowerCase()})
+        const response = await UsersManager.login(infoUser)
+        if(typeof response !== 'undefined'){
+            contextUser.setUser({...response.data, email : data.userName.toLowerCase()})
             navigate(`/menus`)
-        } catch (error) {
-            console.log(error)
+            setErrorLog(null)
+        }else{
+            setErrorLog("Usuario/contraseña no encontrado")
         }
+       
     }
 
     return <>
@@ -49,6 +53,7 @@ const Login = () => {
                         {errors.userName?.type === 'required' && <p className="p_error">Es necesario rellenar todos los campos</p>}
                         {errors.userName?.type === 'pattern' && <p className="p_error">Introduzca un email valido</p>}
                         {errors.password?.type === 'required' && <p className="p_error">Es necesario rellenar todos los campos</p>}
+                        {errorLog && <p className="p_error">{errorLog}</p>}
                     </div>
                     <Typography variant='body1' sx={{ textDecoration: " underline #74AF00" }} className="text_bottom">
                         ¿Has olvidado tu contraseña?

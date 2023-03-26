@@ -1,15 +1,22 @@
-.logo_menu{
-    width: 85%;
-}
+@media (max-width:1700px) {}
 
-.container_menu{
-    display: flex;
-    width: 100%
-}
+@media (max-width:800px) {}
 
-.container_menu_1{
-    display: flex;
-    height: 40rem;
-    align-items: center;
-    justify-content: center;
+@media (max-width:400px) {
+
+    .logo_menu {
+        width: 85%;
+    }
+
+    .container_menu {
+        display: flex;
+        width: 100%
+    }
+
+    .container_menu_1 {
+        display: flex;
+        height: 40rem;
+        align-items: center;
+        justify-content: center;
+    }
 }

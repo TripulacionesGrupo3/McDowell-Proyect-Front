@@ -38,27 +38,28 @@ function EmployeeHome() {
                 </div>
                 <div className='formDiv'>
                     <form className='form' onSubmit={LoginUser}>
-                        <img className='userImg' src='https://cdn-icons-png.flaticon.com/512/3899/3899618.png' alt='NOT FOUND' />
-                        <label className='user' for="fname">
-                            USER
-                        </label>
+                        
+                            <img className='userImg' src='https://cdn-icons-png.flaticon.com/512/3899/3899618.png' alt='NOT FOUND' />
+                            <label className='user' for="fname">
+                                USER
+                            </label>
 
-                        <input className='userInput' type="text" id="employeeUser"
-                            name="employeeemail" placeholder="Introduzca usuario" onChange={(e) => setUserName(e.target.value)} required />
+                            <input className='userInput' type="text" id="employeeUser"
+                                name="employeeemail" placeholder="Introduzca usuario" onChange={(e) => setUserName(e.target.value)} required />
 
-                        <label className='password'>PASSWORD</label>
+                            <label className='password'>PASSWORD</label>
 
-                        <input className='passwordInput' type="password" id="emailOrder"
-                            name="empPass" placeholder="password" onChange={(e) => setPassword(e.target.value)} required />
+                            <input className='passwordInput' type="password" id="emailOrder"
+                                name="empPass" placeholder="password" onChange={(e) => setPassword(e.target.value)} required />
 
-                        <input className='logInBtn' type="submit" value="LOG IN" />
-                        {/* <button className='logInBtn' onClick={() => LoginUser()}>LOG IN</button> */}
-
+                            <input className='logInBtn' type="submit" value="LOG IN" />
+                            {/* <button className='logInBtn' onClick={() => LoginUser()}>LOG IN</button> */}
+                        
                     </form>
                 </div>
             </div>
-            
-            {notLoggedIn && <Modal title={"Ha habido un error"} text={"Usuario y/o contraseña no encontrado"} style={"btnModalEmployees"}  route={() => setNotLoggedIn(false)} />}
+
+            {notLoggedIn && <Modal title={"Ha habido un error"} text={"Usuario y/o contraseña no encontrado"} style={"btnModalEmployees"} route={() => setNotLoggedIn(false)} />}
         </>
 
     )

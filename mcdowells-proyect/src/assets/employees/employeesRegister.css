@@ -1,7 +1,5 @@
 .containerLogReg {
     display: flex;
-    position: absolute;
-    flex-wrap: wrap;
     flex-direction: column;
     padding: 0;
     margin: 0;
@@ -24,6 +22,7 @@
     font-size: 80px;
     color: #316691;
     -webkit-text-stroke: 3px #B1BBC5;
+    margin-top: 0;
 
 }
 
@@ -43,9 +42,8 @@
     width: 400px;
     height: 500px;
     border: 3px solid #000000;
-    margin: 30px 0 40px 0;
     background-color: #D9D9D9;
-    gap: 10px;
+    margin-bottom: 40px;
 }
 
 .userImg {

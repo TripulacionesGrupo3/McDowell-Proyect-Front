@@ -1,38 +1,36 @@
-import '../../assets/clients/clientshome.css'
-import pronto from '../../assets/images/pronto.png'
-import mcTitleLast from '../../assets/images/title.png'
-import vuelva from '../../assets/images/vuelva.png'
-import React from 'react';
+import '../../assets/clients/cart.css'
+import '../../assets/clients/lastPage.css'
 import { useNavigate } from 'react-router-dom';
-import { useCartContext } from '../../context/ShoppingCartContext';
-
-
-
+import { Typography } from '@mui/material';
+import { useUserContext } from "../../context/User";
+import logo from '../../assets/images/logo_burger.png'
 function LastPage() {
-    const context = useCartContext();
+    const contextUser = useUserContext();
     const navigate = useNavigate();
+
     function redireccionar() {
 
-        setTimeout(() => navigate('/'), 5000)
+        setTimeout(() =>{
+            contextUser.setUser([])
+            navigate('/')}
+            , 7000)
     }
 
+    function sendHome (){
+        contextUser.setUser([])
+        navigate('/')
+    }
 
     return (
         <>
-            <div className="container" onLoad={() => redireccionar()}>
-                <div className='leftContainer'></div>
-                <div className="centerContainer">
-                    <div className='topDiv'>
-                        <img className='mcTitleLast' src={mcTitleLast} alt='NOT FOUND' />
-                    </div>
-                    <img className='vuelva' src={vuelva} alt='NOT FOUND' />
-                    <img className='pronto' src={pronto} alt='NOT FOUND' />
-
-                    <div className='bottomDiv'>
-                    </div>
+            <div className='container_cart' onLoad={() => redireccionar()}>
+                <img className='logo_menu_last' src={logo} alt=" NOT FOUND" onClick={() => navigate('/employees-login')} />
+                <div className='containert_ticket_last'>
+                    <Typography variant='h2' sx={{ fontWeight: "bold", fontSize: "24px" }}>
+                        Hemos enviado el ticket de tu compra a la direccion {contextUser.user.email}.¡Gracias por tu compra!
+                    </Typography>
                 </div>
-                <div className='rigthContainer'>
-                </div>
+                <button className='btn_cart' onClick={() => sendHome()}>Finalizar</button>
             </div>
         </>
     )

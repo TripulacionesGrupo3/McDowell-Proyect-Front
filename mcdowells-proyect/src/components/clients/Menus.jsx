@@ -118,7 +118,7 @@ function Menus() {
                 </div>
                 <div className='menu_bottom'>
                     {context.totalCart[0].totalQuantity !== 0 ?
-                        <ShoppingCartOutlinedIcon onClick={() => navigate("cart")} /> :
+                        <ShoppingCartOutlinedIcon onClick={() => navigate("/cart")} /> :
                         <ShoppingCartOutlinedIcon />
                     }
                 </div>

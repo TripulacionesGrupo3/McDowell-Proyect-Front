@@ -1,60 +1,71 @@
+@media (max-width:1700px) {}
 
-.centerMenu{
-    display: flex;
-    margin: 0.8rem;
-    justify-content: center;
-}
-.mcBig{
-    width: 46vw;
-  
-}
+@media (max-width:800px) {}
 
-.menuContainer{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
+@media (max-width:400px) {
 
-.menu_options{
-    display: flex;
-    padding: 10px 10px;
-    width: 90%;
-    background: #FFFFFF;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 16px;
-    align-items: center;
-    justify-content: space-between;
-}
+    .centerMenu {
+        display: flex;
+        margin: 0.8rem;
+        justify-content: center;
+    }
 
-.centerMenu_1{
-    display: flex;
-    margin: 0.8rem;
-    justify-content: center;
-    gap: 1.8rem;
-    flex-direction: column;
-    align-items: center;
-}
+    .mcBig {
+        width: 46vw;
 
-.separator{
-    border-radius: 15px;
-    background-color: #74AF00;
-    width: 6rem;
-    height: 0.3rem;
-}
-.container_separator{
-    display: flex;
-    margin: 1.2rem;
-    justify-content: center;
-}
-.menu_bottom{
-    display: flex;
-    padding: 1rem;
-}
-.container_bottom{
-    display: flex;
-    margin: 0.8rem;
-    background-color: #74AF00;
-    margin-top: 1.8rem;
-    border-radius: 16px;
-    justify-content: space-around;
+    }
+
+    .menuContainer {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .menu_options {
+        display: flex;
+        padding: 10px 10px;
+        width: 90%;
+        background: #FFFFFF;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        border-radius: 16px;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .centerMenu_1 {
+        display: flex;
+        margin: 0.8rem;
+        justify-content: center;
+        gap: 1.8rem;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .separator {
+        border-radius: 15px;
+        background-color: #74AF00;
+        width: 6rem;
+        height: 0.3rem;
+    }
+
+    .container_separator {
+        display: flex;
+        margin: 1.2rem;
+        justify-content: center;
+    }
+
+    .menu_bottom {
+        display: flex;
+        padding: 1rem;
+    }
+
+    .container_bottom {
+        display: flex;
+        margin: 0.8rem;
+        background-color: #74AF00;
+        margin-top: 1.8rem;
+        border-radius: 16px;
+        justify-content: space-around;
+    }
+
 }

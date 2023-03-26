@@ -5,27 +5,32 @@ import { useNavigate } from 'react-router-dom';
 import UsersManager from "../../services/user.Api";
 import { useUserContext } from "../../context/User";
 import { useForm } from "react-hook-form";
+import { useState } from "react";
 
 const Register = () => {
 
     const navigate = useNavigate()
     const contextUser = useUserContext()
+    const [errorLog, setErrorLog] = useState(null)
+    const [log, setLog] = useState(false)
     const { register, handleSubmit, formState: { errors } } = useForm()
 
 
     const onSubmit = async (data) => {
+        setErrorLog(null)
         const userInformation = {
             username: data.userName,
             password: data.password,
             name: data.name
         }
-        try {
-            const response = await UsersManager.register(userInformation)
-            await contextUser.setUser({...response.data, email : data.userName.toLowerCase()})
-            navigate(`/menus`)
-        } catch (e) {
-            console.log(e)
-        }
+
+        const response = await UsersManager.register(userInformation, setErrorLog, setLog)
+        contextUser.setUser({ ...response.data, email: data.userName.toLowerCase() })
+
+    }
+    if (log) {
+
+        navigate('/menus')
     }
 
     return <>
@@ -48,9 +53,10 @@ const Register = () => {
                         {errors.userName?.type === 'required' && <p className="p_error">Es necesario rellenar todos los campos</p>}
                         {errors.userName?.type === 'pattern' && <p className="p_error">Introduzca un email valido</p>}
                         {errors.password?.type === 'required' && <p className="p_error">Es necesario rellenar todos los campos</p>}
+                        {errorLog && <p className="p_error">{errorLog[0].msg}</p>}
                     </div>
                     <div className="containter_btn_reg">
-                        <button className="btn_sendlogin" onClick={()=>navigate("/login")}>Volver</button>
+                        <button className="btn_sendlogin" onClick={() => navigate("/login")}>Volver</button>
                         <button type="submit" className="btn_sendlogin">Registrarse</button>
 
                     </div>

@@ -1,0 +1,20 @@
+@media (max-width:1700px) {}
+
+@media (max-width:800px) {}
+
+@media (max-width:400px) {
+
+    .logo_menu_last {
+        width: 65%;
+    }
+
+    .containert_ticket_last {
+        width: 90%;
+        display: flex;
+        border: 2px solid #74AF00;
+        border-radius: 8px;
+        padding: 0.5rem;
+        box-sizing: border-box;
+        text-align: center;
+    }
+}

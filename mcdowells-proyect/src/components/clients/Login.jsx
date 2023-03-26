@@ -36,7 +36,7 @@ const Login = () => {
     return <>
         <container className="container_menu_login" >
             <div className='container_image_login' >
-                <img className='logo_menu' src={logo} alt=" NOT FOUND" onClick={()=>navigate('/employees-login')}/>
+                <img className='logo_menu_login' src={logo} alt=" NOT FOUND" onClick={()=>navigate('/employees-login')}/>
 
                 <form onSubmit={handleSubmit(onSubmit)} className="container_inputs">
 

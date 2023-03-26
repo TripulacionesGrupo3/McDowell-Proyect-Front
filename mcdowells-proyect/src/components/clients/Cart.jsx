@@ -75,9 +75,9 @@ function Cart() {
                     </div>
                    
                     <div className='containter_text_ticket'>
-                        <div className='text_ticket'>
+                        <div className='text_ticket_title'>
                             <Typography variant='body1' sx={{ fontSize: "14px" }}>
-                                Extra de queso
+                                Extra de tomate
                             </Typography>
                             <Typography variant='body1' sx={{ fontSize: "14px" }}>
                                 Refresco
@@ -96,6 +96,57 @@ function Cart() {
                                 0.50€
                             </Typography>
                         </div>
+                        
+                    </div>
+                    <br/>                     <div className='container_title_ticket'>
+                        <Typography variant='h2' sx={{ fontWeight: "bold", fontSize: "24px" }}>
+                            Complementos
+                        </Typography>  
+                    </div>
+                 
+                    <div className='containter_text_ticket'>
+                        <div className='text_ticket_title'>
+                            <Typography variant='body1' sx={{ fontSize: "14px" }}>
+                                Nuggets de pollo
+                            </Typography>
+                        </div>
+                        <div className='text_ticket'>
+                            <Typography variant='body1' sx={{ fontSize: "14px" }}>
+                                x1
+                            </Typography>
+                        </div>
+                        <div className='text_ticket'>
+                            <Typography variant='body1' sx={{ fontSize: "14px" }}>
+                                1.99€
+                            </Typography>
+                        </div>
+                        
+                    </div>
+                    <br/>
+
+                    <div className='container_title_ticket'>
+                        <Typography variant='h2' sx={{ fontWeight: "bold", fontSize: "24px" }}>
+                            Postres
+                        </Typography>  
+                    </div>
+                    
+                    <div className='containter_text_ticket'>
+                        <div className='text_ticket_title'>
+                            <Typography variant='body1' sx={{ fontSize: "14px" }}>
+                               Helado
+                            </Typography>
+                        </div>
+                        <div className='text_ticket'>
+                            <Typography variant='body1' sx={{ fontSize: "14px" }}>
+                                x1
+                            </Typography>
+                        </div>
+                        <div className='text_ticket'>
+                            <Typography variant='body1' sx={{ fontSize: "14px" }}>
+                                1.50€
+                            </Typography>
+                        </div>
+                        
                     </div>
                 </div>
                 <div className='container_btn_cart'>

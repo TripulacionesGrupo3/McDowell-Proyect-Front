@@ -23,40 +23,40 @@ function Cart() {
             totalPrice: 0,
             totalQuantity: 0
         }])
-        
+
         navigate('/see-you-soon')
     }
 
     //enviar pedido
-   /* const deleteProduct = (id) => {
-        const isInCart = context.cart.find(item => item.id_product === id)
-
-        if (isInCart.quantity === 1) {
-
-            const setDeleteProd = context.cart.filter(item => isInCart.id_product !== item.id_product);
-            context.setCart(setDeleteProd);
-
-        } else {
-
-            const setDeleteOne = context.cart.map(item =>
-                item.id_product === isInCart.id_product ? {
-                    ...isInCart,
-                    quantity: isInCart.quantity - 1,
-                    total: isInCart.price * (isInCart.quantity - 1)
-                } : item
-            );
-            context.setCart(setDeleteOne);
-        }
-        const setTotalPrice = () => context.totalCart.map((item) => {
-            return (
-                {
-                    totalPrice: item.totalPrice - isInCart.price,
-                    totalQuantity: item.totalQuantity - 1
-                })
-        })
-        context.setTotalCart(setTotalPrice)
-
-    } */
+    /* const deleteProduct = (id) => {
+         const isInCart = context.cart.find(item => item.id_product === id)
+ 
+         if (isInCart.quantity === 1) {
+ 
+             const setDeleteProd = context.cart.filter(item => isInCart.id_product !== item.id_product);
+             context.setCart(setDeleteProd);
+ 
+         } else {
+ 
+             const setDeleteOne = context.cart.map(item =>
+                 item.id_product === isInCart.id_product ? {
+                     ...isInCart,
+                     quantity: isInCart.quantity - 1,
+                     total: isInCart.price * (isInCart.quantity - 1)
+                 } : item
+             );
+             context.setCart(setDeleteOne);
+         }
+         const setTotalPrice = () => context.totalCart.map((item) => {
+             return (
+                 {
+                     totalPrice: item.totalPrice - isInCart.price,
+                     totalQuantity: item.totalQuantity - 1
+                 })
+         })
+         context.setTotalCart(setTotalPrice)
+ 
+     } */
 
 
     return (
@@ -64,98 +64,113 @@ function Cart() {
             <NavBar />
             <div className='container_cart'>
                 <div className='containert_ticket'>
+                    {context.cart.map((prod) =>
+                        <div className='container_title_ticket'>
+                            <Typography variant='h2' sx={{ fontWeight: "bold", fontSize: "24px" }}>
+                                {prod.name}
+                            </Typography>
+                            <Typography variant='body1' sx={{ fontSize: "14px" }}>
+                                {prod.price}€
+                            </Typography>
+
+                        </div>)}
+
+
+                    <div className='containter_text_ticket'>
+                        <div className='text_ticket_title'>
+                            {context.extrasCart.map((prod) => prod.id <= 12 ?
+                                <Typography variant='body1' sx={{ fontSize: "14px" }}>
+                                    {prod.title}
+                                </Typography>
+                                : "")}
+                        </div>
+                        <div className='text_ticket'>
+                            {context.extrasCart.map((prod) => prod.id <= 12 ?
+                                <Typography variant='body1' sx={{ fontSize: "14px" }}>
+                                    {prod.id <= 3 ? `x ${prod.quantity}` : ""}
+                                </Typography>
+                                : "")}
+                        </div>
+                        <div className='text_ticket'>
+                            {context.extrasCart.map((prod) => prod.id <= 12 ?
+                                <Typography variant='body1' sx={{ fontSize: "14px" }}>
+                                    {prod.price ? `${prod.price} €` : ""}
+                                </Typography>
+                                : "")}
+                        </div>
+
+                    </div>
+                    <br />
                     <div className='container_title_ticket'>
                         <Typography variant='h2' sx={{ fontWeight: "bold", fontSize: "24px" }}>
-                            Menu Burger
-                        </Typography>
-                        <Typography variant='body1' sx={{ fontSize: "14px" }}>
-                            13.50€
-                        </Typography>
-                  
-                    </div>
-                   
-                    <div className='containter_text_ticket'>
-                        <div className='text_ticket_title'>
-                            <Typography variant='body1' sx={{ fontSize: "14px" }}>
-                                Extra de tomate
-                            </Typography>
-                            <Typography variant='body1' sx={{ fontSize: "14px" }}>
-                                Refresco
-                            </Typography>
-                            <Typography variant='body1' sx={{ fontSize: "14px" }}>
-                                Patatas Normales
-                            </Typography>
-                        </div>
-                        <div className='text_ticket'>
-                            <Typography variant='body1' sx={{ fontSize: "14px" }}>
-                                x1
-                            </Typography>
-                        </div>
-                        <div className='text_ticket'>
-                            <Typography variant='body1' sx={{ fontSize: "14px" }}>
-                                0.50€
-                            </Typography>
-                        </div>
-                        
-                    </div>
-                    <br/>                     <div className='container_title_ticket'>
-                        <Typography variant='h2' sx={{ fontWeight: "bold", fontSize: "24px" }}>
                             Complementos
-                        </Typography>  
+                        </Typography>
                     </div>
-                 
+
                     <div className='containter_text_ticket'>
                         <div className='text_ticket_title'>
+                        {context.extrasCart.map((prod) => prod.id >= 13 && prod.id<=16?
                             <Typography variant='body1' sx={{ fontSize: "14px" }}>
-                                Nuggets de pollo
+                                {prod.title}
                             </Typography>
+                            :"")}
                         </div>
                         <div className='text_ticket'>
+                        {context.extrasCart.map((prod) => prod.id >= 13 && prod.id<=16?
                             <Typography variant='body1' sx={{ fontSize: "14px" }}>
-                                x1
+                                x {prod.quantity}
                             </Typography>
+                            :"")}
                         </div>
                         <div className='text_ticket'>
+                        {context.extrasCart.map((prod) => prod.id >= 13 && prod.id<=16?
                             <Typography variant='body1' sx={{ fontSize: "14px" }}>
-                                1.99€
+                                {prod.price}€
                             </Typography>
+                            :"")}
                         </div>
-                        
+
                     </div>
-                    <br/>
+                    <br />
 
                     <div className='container_title_ticket'>
                         <Typography variant='h2' sx={{ fontWeight: "bold", fontSize: "24px" }}>
                             Postres
-                        </Typography>  
+                        </Typography>
                     </div>
-                    
+
                     <div className='containter_text_ticket'>
                         <div className='text_ticket_title'>
+                        {context.extrasCart.map((prod) => prod.id > 16 ?
                             <Typography variant='body1' sx={{ fontSize: "14px" }}>
-                               Helado
+                                {prod.title}
                             </Typography>
+                             :"")}
                         </div>
                         <div className='text_ticket'>
+                        {context.extrasCart.map((prod) => prod.id > 16 ?
                             <Typography variant='body1' sx={{ fontSize: "14px" }}>
-                                x1
+                                x {prod.quantity}
                             </Typography>
+                            :"")}
                         </div>
                         <div className='text_ticket'>
+                        {context.extrasCart.map((prod) => prod.id > 16 ?
                             <Typography variant='body1' sx={{ fontSize: "14px" }}>
-                                1.50€
+                                {prod.price}€
                             </Typography>
+                            :"")}
                         </div>
-                        
+
                     </div>
                 </div>
                 <div className='container_btn_cart'>
-                    <div className='btn_cart' style={{backgroundColor : "#D5D5D5"}} onClick={()=>sendOrder()}>
+                    <div className='btn_cart' style={{ backgroundColor: "#D5D5D5" }} onClick={() => sendOrder()}>
                         <Typography variant='body1' sx={{ fontWeight: "bold", fontSize: "14px" }}>
                             Pagar
                         </Typography>
                     </div>
-                    <div className='btn_cart' onClick={()=>navigate("/menus")}>
+                    <div className='btn_cart' onClick={() => navigate("/menus")}>
                         <Typography variant='body1' sx={{ fontWeight: "bold", fontSize: "14px" }}>
                             Seguir Comprando
                         </Typography>

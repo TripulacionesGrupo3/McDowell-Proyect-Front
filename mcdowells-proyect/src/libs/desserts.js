@@ -7,7 +7,7 @@ const desserts = [
     id: 17,
     image: ice_cream,
     title: "Helado",
-    price : 1.5
+    price : 1.50
   },
   {
     id: 18,

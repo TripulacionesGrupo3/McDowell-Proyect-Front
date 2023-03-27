@@ -8,13 +8,27 @@ import drinks from "../../libs/bebidas";
 import { useNavigate } from 'react-router-dom';
 import TaskAltOutlinedIcon from '@mui/icons-material/TaskAltOutlined';
 import NavBarBottom from './NavBarBotttom';
+import { useCartContext } from '../../context/ShoppingCartContext';
 
 const MenuBebidas = () => {
 
     const [idProd, setIdProd] = useState()
     const navigate = useNavigate()
+    const context = useCartContext();
 
-
+    const addToCart = (id, product) => {
+        setIdProd(id)
+        const isInCart = context.extrasCart.find(item => item.id === id)
+        if (isInCart) {
+            const setOneProd = context.extrasCart.map(item => { return { ...item } })
+            context.setExtrasCart(setOneProd);
+        } else {
+            context.extrasCart.push({
+                ...product,
+                quantity: 1
+            })
+        }
+    }
 
     return <>
         <NavBarMenus />
@@ -45,7 +59,7 @@ const MenuBebidas = () => {
                         </div>
                         :
                         <div className='container_bebidas_nocheck'>
-                            <img src={product.image} alt="auto" onClick={() => setIdProd(product.id)} />
+                            <img src={product.image} alt="auto" onClick={() => addToCart(product.id,product)} />
                         </div>}
                 </>
             )}

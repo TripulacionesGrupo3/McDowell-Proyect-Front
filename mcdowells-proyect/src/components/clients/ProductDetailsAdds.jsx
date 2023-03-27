@@ -6,12 +6,27 @@ import TaskAltOutlinedIcon from '@mui/icons-material/TaskAltOutlined';
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import NavBarBottom from './NavBarBotttom';
+import { useCartContext } from '../../context/ShoppingCartContext';
 
 const ProductDetailsAdds = () => {
 
     const [idProd, setIdProd] = useState()
     const navigate = useNavigate()
-
+    const context = useCartContext();
+    
+    const addToCart = (id, product) => {
+        setIdProd(id)
+        const isInCart = context.extrasCart.find(item => item.id === id)
+        if (isInCart) {
+            const setOneProd = context.extrasCart.map(item => { return { ...item } })
+            context.setExtrasCart(setOneProd);
+        } else {
+            context.extrasCart.push({
+                ...product,
+                quantity: 1
+            })
+        }
+    }
 
     return <>
         <NavBarMenus />
@@ -34,7 +49,7 @@ const ProductDetailsAdds = () => {
         <div className='container_adds'>
             {adds.map((product) =>
                 <div className='container_add_details'>
-                    <img src={product.image} alt="auto" onClick={() => setIdProd(product.id)} />
+                    <img src={product.image} alt="auto" onClick={() => addToCart(product.id, product)} />
                     {idProd === product.id ?
                         (<TaskAltOutlinedIcon sx={{ borderRadius: "100px", backgroundColor: "#74AF00" }}
                             className="check" />)

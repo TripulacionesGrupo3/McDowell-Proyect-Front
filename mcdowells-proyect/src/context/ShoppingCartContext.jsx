@@ -6,13 +6,15 @@ export const ShoppingCartProvider = ({ children }) => {
 
     const [cart, setCart] = useState([])
 
+    const [extrasCart, setExtrasCart] = useState([])
+
     const [totalCart, setTotalCart] = useState([{
         totalPrice: 0,
         totalQuantity: 0
     }]);
 
     return (
-        <CartContext.Provider value={{ cart, setCart, totalCart, setTotalCart }}>
+        <CartContext.Provider value={{ cart, setCart, totalCart, setTotalCart, extrasCart, setExtrasCart }}>
             {children}
         </CartContext.Provider>
     );

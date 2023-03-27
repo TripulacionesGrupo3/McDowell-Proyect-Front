@@ -5,19 +5,19 @@ const ingredients = [
   {
     id: 1,
     image: tomato,
-    price: 1,
+    price: 0.50,
     title: "Tomate",
   },
   {
     id: 2,
     image: onions,
-    price: 1,
+    price: 0.50,
     title: "Cebolla",
   },
   {
     id: 3,
     image: lettuce,
-    price: 1,
+    price: 0.50,
     title: "Lechuga",
   },
 ];

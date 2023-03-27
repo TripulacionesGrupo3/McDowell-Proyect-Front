@@ -18,28 +18,64 @@ const MenuExtras = () => {
     const navigate = useNavigate()
     const context = useCartContext();
     const price = 1.99
-    const addToTotal = (id) => {
+
+    const addToTotal = (id, product) => {
+
+        const isInCart = context.extrasCart.find(item => item.id === id)
+        if (isInCart) {
+            const setOneProd = context.extrasCart.map(item =>
+                item.id === isInCart.id ? {
+                    ...item, quantity: item.quantity + 1, total: item.price * (item.quantity + 1)
+                } : item
+            );
+            context.setExtrasCart(setOneProd);
+        } else {
+            context.extrasCart.push({
+                ...product,
+                total: product.price,
+                quantity: 1
+            })
+        }
+
+
         const setTotalPrice = context.totalCart.map((item) => {
             return (
                 {
-                    totalPrice: item.totalPrice + price,
+                    totalPrice: item.totalPrice + product.price,
                     totalQuantity: item.totalQuantity
                 })
         })
         context.setTotalCart(setTotalPrice)
         setIdProd(id)
-        setTotal(total + price)
+        setTotal(total + product.price)
     }
 
-    const removeToTotal = async () => {
+    const removeToTotal = async (id, product) => {
+
+        const isInCart = context.extrasCart.find(item => item.id === id)
+        if (isInCart.quantity === 1) {
+            const setDeleteProd = context.extrasCart.filter(item => isInCart.id !== item.id);
+            context.setExtrasCart(setDeleteProd);
+
+        } else {
+            const setDeleteOne = context.extrasCart.map(item =>
+                item.id === isInCart.id ? {
+                    ...isInCart,
+                    quantity: isInCart.quantity - 1,
+                    total: isInCart.price * (isInCart.quantity - 1)
+                } : item
+            );
+            context.setExtrasCart(setDeleteOne);
+        }
+
         if(total !==0){
-         setTotal(total - price)
+         setTotal(total - product.price)
         }
         if (total > 0) {
             const setTotalPrice = context.totalCart.map((item) => {
                 return (
                     {
-                        totalPrice: item.totalPrice - price,
+                        totalPrice: item.totalPrice - product.price,
                         totalQuantity: item.totalQuantity
                     })
             })
@@ -82,13 +118,13 @@ const MenuExtras = () => {
                                     {product.title}
                                 </Typography>
                                 <button className='btn_ingredients' >
-                                    <AddCircleOutlineIcon onClick={() => addToTotal(product.id)}/>
+                                    <AddCircleOutlineIcon onClick={() => addToTotal(product.id, product)}/>
                                     <Typography variant='body1' sx={{ fontWeight: "bold", fontSize: "14px" }}>
                                         Añadir
                                     </Typography>
                                 </button>
                                 <button className='btn_ingredients' >
-                                    <RemoveCircleOutlineIcon onClick={() => removeToTotal()}/>
+                                    <RemoveCircleOutlineIcon onClick={() => removeToTotal(product.id, product)}/>
                                     <Typography variant='body1' sx={{ fontWeight: "bold", fontSize: "14px" }}>
                                         Quitar
                                     </Typography>
@@ -110,13 +146,13 @@ const MenuExtras = () => {
                                 <Typography variant='h2' sx={{ fontWeight: "bold", fontSize: "20px" }}>
                                     {product.title}
                                 </Typography>
-                                <button className='btn_ingredients' onClick={() => addToTotal(product.id)}>
+                                <button className='btn_ingredients' onClick={() => addToTotal(product.id, product)}>
                                     <AddCircleOutlineIcon />
                                     <Typography variant='body1' sx={{ fontWeight: "bold", fontSize: "14px" }}>
                                         Añadir
                                     </Typography>
                                 </button>
-                                <button className='btn_ingredients' onClick={() => removeToTotal(null)}>
+                                <button className='btn_ingredients' onClick={() => removeToTotal(product.id, product)}>
                                     <RemoveCircleOutlineIcon />
                                     <Typography variant='body1' sx={{ fontWeight: "bold", fontSize: "14px" }}>
                                         Quitar

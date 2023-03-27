@@ -56,6 +56,7 @@ const RegisterEmployees = () => {
                         <option value=""></option>
                         <option value="chef">Chef</option>
                         <option value="waiter">Camarero</option>
+                        <option value="admin">Administrador</option>
                     </select>
 
                     <div> <input className='signInBtn' type="submit" value="REGISTRAR" />

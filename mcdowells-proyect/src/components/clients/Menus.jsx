@@ -18,7 +18,7 @@ import ModalBurger from './ModalBurgers';
 function Menus() {
     const navigate = useNavigate();
     const [products, setProducts] = useState([]);
-    const [showModal, setShowModal] = useState(false)
+   // const [showModal, setShowModal] = useState(false)
     const context = useCartContext();
 
 
@@ -73,7 +73,7 @@ function Menus() {
                         {product.id_product === 2 && <img className='mcBig' src={menuJr} alt='NOT FOUND'
                             onClick={() => addProduct(product.id_product, product)}
                         />}
-                        {showModal && <ModalBurger idProduct={products.id_product} />}
+                        {/*showModal && <ModalBurger idProduct={products.id_product} /> */}
                     </div>
 
                 )}

@@ -7,27 +7,27 @@ import beer_zero from "../assets/images/cerveza_cero.png";
 
 const bebidas = [
   {
-    id: 1,
+    id: 7,
     image: coca,
   },
   {
-    id: 2,
+    id: 8,
     image: coca_zero,
   },
   {
-    id: 3,
+    id: 9,
     image: fanta,
   },
   {
-    id: 4,
+    id: 10,
     image: water,
   },
   {
-    id: 5,
+    id: 11,
     image: beer,
   },
   {
-    id: 6,
+    id: 12,
     image: beer_zero,
   },
 ];

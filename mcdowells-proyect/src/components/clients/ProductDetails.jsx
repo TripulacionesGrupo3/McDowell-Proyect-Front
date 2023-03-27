@@ -24,27 +24,66 @@ function ProductDetails() {
         ProductsManager.getSingleProduct(setProduct, id)
     }, [])
 
-    const addToTotal = () => {
+
+
+
+    const addToTotal = (id, product) => {
+
+        const isInCart = context.extrasCart.find(item => item.id === id)
+        if (isInCart) {
+            const setOneProd = context.extrasCart.map(item =>
+                item.id === isInCart.id ? {
+                    ...item, quantity: item.quantity + 1, total: item.price * (item.quantity + 1)
+                } : item
+            );
+            context.setExtrasCart(setOneProd);
+        } else {
+            context.extrasCart.push({
+                ...product,
+                total: product.price,
+                quantity: 1
+            })
+        }
+
         const setTotalPrice = context.totalCart.map((item) => {
             return (
                 {
-                    totalPrice: item.totalPrice + price,
+                    totalPrice: item.totalPrice + product.price,
                     totalQuantity: item.totalQuantity
                 })
         })
         context.setTotalCart(setTotalPrice)
-        setTotal(total + price)
+        setTotal(total + product.price)
     }
 
-    const removeToTotal = async () => {
+    const removeToTotal = async (id, product) => {
+
+        const isInCart = context.extrasCart.find(item => item.id === id)
+        if (isInCart.quantity === 1) {
+
+            const setDeleteProd = context.extrasCart.filter(item => isInCart.id !== item.id);
+            context.setExtrasCart(setDeleteProd);
+
+        } else {
+
+            const setDeleteOne = context.extrasCart.map(item =>
+                item.id === isInCart.id ? {
+                    ...isInCart,
+                    quantity: isInCart.quantity - 1,
+                    total: isInCart.price * (isInCart.quantity - 1)
+                } : item
+            );
+            context.setExtrasCart(setDeleteOne);
+        }
+
         if (total !== 0) {
-            setTotal(total - price)
+            setTotal(total - product.price)
         }
         if (total > 0) {
             const setTotalPrice = context.totalCart.map((item) => {
                 return (
                     {
-                        totalPrice: item.totalPrice - price,
+                        totalPrice: item.totalPrice - product.price,
                         totalQuantity: item.totalQuantity
                     })
             })
@@ -87,13 +126,13 @@ function ProductDetails() {
                             <Typography variant='h2' sx={{ fontWeight: "bold", fontSize: "24px" }}>
                                 {product.title}
                             </Typography>
-                            <button className='btn_ingredients' onClick={() => addToTotal()}>
+                            <button className='btn_ingredients' onClick={() => addToTotal(product.id, product)}>
                                 <AddCircleOutlineIcon />
                                 <Typography variant='body1' sx={{ fontWeight: "bold", fontSize: "14px" }}>
                                     Añadir
                                 </Typography>
                             </button>
-                            <button className='btn_ingredients' onClick={() => removeToTotal()}>
+                            <button className='btn_ingredients' onClick={() => removeToTotal(product.id, product)}>
                                 <RemoveCircleOutlineIcon />
                                 <Typography variant='body1' sx={{ fontWeight: "bold", fontSize: "14px" }}>
                                     Quitar

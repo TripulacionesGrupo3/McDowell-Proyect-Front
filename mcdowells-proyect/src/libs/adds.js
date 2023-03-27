@@ -6,17 +6,17 @@ const adds = [
   {
     image: chips,
     title: "Patatas fritas",
-    id: 1,
+    id: 4,
   },
   {
     image: specialChips,
     title: "Patatas de gajo",
-    id: 2,
+    id: 5,
   },
   {
     image: cheeseStick,
     title: "Palitos de queso",
-    id: 3,
+    id: 6,
   },
 ];
 

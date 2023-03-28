@@ -1,4 +1,3 @@
-import React from 'react';
 import '../../assets/clients/cart.css'
 import { useNavigate } from 'react-router-dom';
 import { useCartContext } from '../../context/ShoppingCartContext';
@@ -9,7 +8,9 @@ import NavBarBottom from './NavBarBotttom';
 import papelCero from "../../assets/images/papel_cero.png"
 import OrdersManager from "../../services/order.Api";
 
+
 function Cart() {
+   
     const navigate = useNavigate();
     const context = useCartContext();
     const contextUser = useUserContext()
@@ -27,37 +28,7 @@ function Cart() {
         navigate('/see-you-soon')
     }
 
-    //enviar pedido
-    /* const deleteProduct = (id) => {
-         const isInCart = context.cart.find(item => item.id_product === id)
- 
-         if (isInCart.quantity === 1) {
- 
-             const setDeleteProd = context.cart.filter(item => isInCart.id_product !== item.id_product);
-             context.setCart(setDeleteProd);
- 
-         } else {
- 
-             const setDeleteOne = context.cart.map(item =>
-                 item.id_product === isInCart.id_product ? {
-                     ...isInCart,
-                     quantity: isInCart.quantity - 1,
-                     total: isInCart.price * (isInCart.quantity - 1)
-                 } : item
-             );
-             context.setCart(setDeleteOne);
-         }
-         const setTotalPrice = () => context.totalCart.map((item) => {
-             return (
-                 {
-                     totalPrice: item.totalPrice - isInCart.price,
-                     totalQuantity: item.totalQuantity - 1
-                 })
-         })
-         context.setTotalCart(setTotalPrice)
- 
-     } */
-
+    
 
     return (
         <>
@@ -182,6 +153,7 @@ function Cart() {
 
             </div>
             <NavBarBottom />
+            
         </>
     )
 }

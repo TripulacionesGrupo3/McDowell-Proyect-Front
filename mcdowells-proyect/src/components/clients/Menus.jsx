@@ -13,12 +13,12 @@ import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlin
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import ModalBurger from './ModalBurgers';
+import ModalMenus from "./ModalMenus"
 
 function Menus() {
     const navigate = useNavigate();
     const [products, setProducts] = useState([]);
-   // const [showModal, setShowModal] = useState(false)
+     const [showModal, setShowModal] = useState(false)
     const context = useCartContext();
 
 
@@ -37,26 +37,26 @@ function Menus() {
                 } : item
             );
             context.setCart(setOneProd);
-             navigate("/menus/selection")
+            
         } else {
-
             context.cart.push({
                 ...product,
                 total: product.price,
                 quantity: 1
 
             })
-             navigate("/menus/selection")
+            
         }
         const setTotalPrice = context.totalCart.map((item) => {
             return (
-                {   
+                {
                     totalPrice: item.totalPrice + product.price,
                     totalQuantity: item.totalQuantity + 1
                 })
         })
-        
+
         context.setTotalCart(setTotalPrice)
+        setShowModal(true)
     }
 
     return (
@@ -73,7 +73,7 @@ function Menus() {
                         {product.id_product === 2 && <img className='mcBig' src={menuJr} alt='NOT FOUND'
                             onClick={() => addProduct(product.id_product, product)}
                         />}
-                        {/*showModal && <ModalBurger idProduct={products.id_product} /> */}
+                       
                     </div>
 
                 )}
@@ -126,7 +126,8 @@ function Menus() {
                     <PersonOutlineOutlinedIcon />
                 </div>
             </div>
-
+          
+             {showModal && <ModalMenus  /> }
         </>
     )
 }

@@ -9,6 +9,7 @@ import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import { useNavigate } from 'react-router-dom';
 import { useCartContext } from '../../context/ShoppingCartContext';
 import NavBarBottom from './NavBarBotttom';
+import ModalFinal from './ModalFinal';
 
 const Desserts = () => {
 
@@ -16,9 +17,10 @@ const Desserts = () => {
     const navigate = useNavigate()
     const [total, setTotal] = useState(0)
     const context = useCartContext();
+    const [showModal, setShowModal] = useState(false)
 
     const addToTotal = (id, product) => {
-        
+
         const isInCart = context.extrasCart.find(item => item.id === id)
         if (isInCart) {
             const setOneProd = context.extrasCart.map(item =>
@@ -72,7 +74,7 @@ const Desserts = () => {
             setTotal(total - product.price)
         }
         if (total > 0) {
-            
+
             const setTotalPrice = context.totalCart.map((item) => {
                 return (
                     {
@@ -86,7 +88,6 @@ const Desserts = () => {
     }
 
 
-
     return <>
         <NavBarHelados />
         <div className='container_top_extras'>
@@ -98,7 +99,7 @@ const Desserts = () => {
                     Añade un complemento por 1,99€
                 </Typography>
             </div>
-            <div className='btn_single_add' onClick={()=>navigate("/cart")} >
+            <div className='btn_single_add' onClick={() => setShowModal(true)} >
                 <Typography variant='body1' sx={{ fontWeight: "bold", fontSize: "14px" }}>
                     Continuar
                 </Typography>
@@ -119,13 +120,13 @@ const Desserts = () => {
                                     {product.title}
                                 </Typography>
                                 <button className='btn_ingredients' >
-                                    <AddCircleOutlineIcon onClick={() => addToTotal(product.id, product)}/>
+                                    <AddCircleOutlineIcon onClick={() => addToTotal(product.id, product)} />
                                     <Typography variant='body1' sx={{ fontWeight: "bold", fontSize: "14px" }}>
                                         Añadir
                                     </Typography>
                                 </button>
                                 <button className='btn_ingredients' >
-                                    <RemoveCircleOutlineIcon onClick={() => removeToTotal(product.id, product)}/>
+                                    <RemoveCircleOutlineIcon onClick={() => removeToTotal(product.id, product)} />
                                     <Typography variant='body1' sx={{ fontWeight: "bold", fontSize: "14px" }}>
                                         Quitar
                                     </Typography>
@@ -154,7 +155,7 @@ const Desserts = () => {
                                     </Typography>
                                 </button>
                                 <button className='btn_ingredients' >
-                                    <RemoveCircleOutlineIcon onClick={() => removeToTotal(product.id,product)}/>
+                                    <RemoveCircleOutlineIcon onClick={() => removeToTotal(product.id, product)} />
                                     <Typography variant='body1' sx={{ fontWeight: "bold", fontSize: "14px" }}>
                                         Quitar
                                     </Typography>
@@ -170,6 +171,8 @@ const Desserts = () => {
             )}
         </div>
         <NavBarBottom />
+
+        {showModal && <ModalFinal />}
     </>
 
 }

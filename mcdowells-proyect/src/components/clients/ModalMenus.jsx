@@ -9,7 +9,7 @@ import logoTop from '../../assets/images/top_single_menu.png'
 import logoNavBar from '../../assets/images/logo_navbar.png'
 
 const ModalMenus = (props) => {
-    const [MsgErrors, setMsgEerrors] = useState(props.textErrors)
+    
     const navigate = useNavigate();
 
     return <>

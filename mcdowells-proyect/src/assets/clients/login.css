@@ -144,7 +144,7 @@
     .container_image_login {
         display: flex;
         margin: 1rem;
-        width: 90%;
+        width: 70%;
         align-items: center;
         justify-content: center;
         flex-direction: column;

@@ -54,7 +54,7 @@ const ModalFinal = (props) => {
                 </div>
                 <div className='texto_top_final'>
                     <HighlightOffIcon onClick={() => navigate("/cart")} />
-                    <Typography variant='h2' sx={{ fontWeight: "bold", fontSize: "24px" }}>
+                    <Typography variant='h2' sx={{ fontWeight: "bold", fontSize: "17px" }}>
                         Completa tu pedido
                     </Typography>
                 </div>
@@ -64,7 +64,7 @@ const ModalFinal = (props) => {
                         <>
                             <div className='modal_final_1'>
                                 <div className='modal_cont_2'>
-                                    <Typography variant='body1' sx={{ fontSize: "20px" }}>
+                                    <Typography variant='body1' sx={{ fontSize: "15px" }}>
                                         {prod.title}<br />
                                         {prod.price} €
                                     </Typography>

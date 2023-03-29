@@ -18,7 +18,8 @@ import ModalMenus from "./ModalMenus"
 function Menus() {
     const navigate = useNavigate();
     const [products, setProducts] = useState([]);
-     const [showModal, setShowModal] = useState(false)
+    const [showModal, setShowModal] = useState(false)
+   
     const context = useCartContext();
 
 
@@ -57,6 +58,7 @@ function Menus() {
 
         context.setTotalCart(setTotalPrice)
         setShowModal(true)
+     
     }
 
     return (
@@ -128,6 +130,7 @@ function Menus() {
             </div>
           
              {showModal && <ModalMenus  /> }
+             
         </>
     )
 }

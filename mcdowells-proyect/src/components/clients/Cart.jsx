@@ -142,7 +142,7 @@ function Cart() {
                         </Typography>
                     </div>
                     <div className='btn_cart' onClick={() => navigate("/menus")}>
-                        <Typography variant='body1' sx={{ fontWeight: "bold", fontSize: "14px" }}>
+                        <Typography variant='body1' sx={{ fontWeight: "bold", fontSize: "13px" }}>
                             Seguir Comprando
                         </Typography>
                     </div>

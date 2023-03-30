@@ -8,8 +8,19 @@ import { Typography } from '@mui/material';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { useCartContext } from '../../context/ShoppingCartContext';
 import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react'
 
 const ModalFinal = (props) => {
+
+    const [styleMod, setStyleMod] = useState("modal-close")
+
+    useEffect(() => {
+        setTimeout(() => {
+            setStyleMod("containerModal_final")
+        }, 100)
+
+
+    }, [])
 
     const context = useCartContext();
     const navigate = useNavigate()
@@ -43,7 +54,7 @@ const ModalFinal = (props) => {
 
     return <>
         <div className="containerModal_clients">
-            <div className="containerModal_final" onClick={props.back}>
+            <div className={styleMod} onClick={props.back}>
 
                 <div className='image_nav_modal'>
                     <img src={logoNavBar} alt={logoNavBar} className="image_logo_modal" />

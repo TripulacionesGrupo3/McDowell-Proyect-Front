@@ -31,7 +31,7 @@ const NavBarMenus = () => {
             </div>
 
             <div className='text_top'>
-                <Typography variant='h2' sx={{ fontWeight: "bold", fontSize: "24px" }}>
+                <Typography variant='h2' sx={{ fontWeight: "bold", fontSize: "20px" }}>
                     Menú Burguer
                 </Typography>
             </div>

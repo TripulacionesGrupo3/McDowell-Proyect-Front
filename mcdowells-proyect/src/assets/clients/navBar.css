@@ -93,7 +93,8 @@
 
     .image_logo_nav {
         position: absolute;
-        margin-top: 2rem;
+        margin-top: 3.1rem;
+        width: 35%;
     }
 
     .image_nav {

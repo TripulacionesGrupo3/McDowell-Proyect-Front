@@ -98,7 +98,7 @@ function ProductDetails() {
 
             <div className='containter_custom_menu'>
                 <div className='text_custom_menu'>
-                    <Typography variant='h2' sx={{ fontWeight: "bold", fontSize: "24px" }}>
+                    <Typography variant='h2' sx={{ fontWeight: "bold", fontSize: "20px" }}>
                         Personaliza tu Menú
                     </Typography >
                     <Typography variant='body1' sx={{ fontWeight: "bold", fontSize: "14px" }}>
@@ -107,7 +107,7 @@ function ProductDetails() {
                 </div>
             </div>
             <div className='containter_custom_text'>
-                <Typography variant='h2' sx={{ fontWeight: "bold", fontSize: "24px" }} >
+                <Typography variant='h2' sx={{ fontWeight: "bold", fontSize: "20px" }} >
                     ¡Como tú quieras!
                 </Typography>
                 <div className='btn_single' onClick={() => navigate("/menus/adds-on")}>
@@ -123,7 +123,7 @@ function ProductDetails() {
                             <img src={product.image} />
                         </div>
                         <div className='ingredients_options'>
-                            <Typography variant='h2' sx={{ fontWeight: "bold", fontSize: "24px" }}>
+                            <Typography variant='h2' sx={{ fontWeight: "bold", fontSize: "20px" }}>
                                 {product.title}
                             </Typography>
                             <button className='btn_ingredients' onClick={() => addToTotal(product.id, product)}>

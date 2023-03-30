@@ -6,37 +6,44 @@ import UsersManager from "../../services/user.Api";
 import { useUserContext } from "../../context/User";
 import { useForm } from "react-hook-form";
 import { Typography } from "@mui/material";
-import { useState } from "react";
-
+import { useEffect, useState } from "react";
+import ModalPolitics from "./ModalPoliticas";
 
 
 const Login = () => {
     const contextUser = useUserContext()
     const navigate = useNavigate()
     const [errorLog, setErrorLog] = useState(null)
+    const [showMod, setShowMod] = useState(false)
     const { register, handleSubmit, formState: { errors } } = useForm()
 
+    useEffect(() => {
+        setTimeout(() => {
+            setShowMod(!showMod)
+        }, 1000)
+    }, [])
 
+   
     const onSubmit = async (data) => {
         const infoUser = {
             username: data.userName,
             password: data.password
         }
         const response = await UsersManager.login(infoUser)
-        if(typeof response !== 'undefined'){
-            contextUser.setUser({...response.data, email : data.userName.toLowerCase()})
+        if (typeof response !== 'undefined') {
+            contextUser.setUser({ ...response.data, email: data.userName.toLowerCase() })
             navigate(`/menus`)
             setErrorLog(null)
-        }else{
+        } else {
             setErrorLog("Usuario/contraseña no encontrado")
         }
-       
+
     }
 
     return <>
         <container className="container_menu_login" >
             <div className='container_image_login' >
-                <img className='logo_menu_login' src={logo} alt=" NOT FOUND" onClick={()=>navigate('/employees-login')}/>
+                <img className='logo_menu_login' src={logo} alt=" NOT FOUND" onClick={() => navigate('/employees-login')} />
 
                 <form onSubmit={handleSubmit(onSubmit)} className="container_inputs">
 
@@ -64,7 +71,7 @@ const Login = () => {
                 <button className="btn_sendlogin" onClick={() => navigate("/register/new-account")}>Registrate</button>
             </div>
         </container>
-
+        {showMod && <ModalPolitics close={()=>setShowMod(!showMod)}/>}
     </>
 
 }

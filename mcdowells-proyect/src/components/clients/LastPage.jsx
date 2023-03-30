@@ -11,20 +11,20 @@ function LastPage() {
     function redireccionar() {
 
         setTimeout(() =>{
-            contextUser.setUser([])
-            navigate('/')}
+            
+            navigate('/menus')}
             , 7000)
     }
 
     function sendHome (){
-        contextUser.setUser([])
-        navigate('/')
+       
+        navigate('/menus')
     }
 
     return (
         <>
-            <div className='container_cart' onLoad={() => redireccionar()}>
-                <img className='logo_menu_last' src={logo} alt=" NOT FOUND" onClick={() => navigate('/employees-login')} />
+            <div className='container_final_msg' onLoad={() => redireccionar()}>
+               {/* <img className='logo_menu_last' src={logo} alt=" NOT FOUND" onClick={() => navigate('/employees-login')} />*/}
                 <div className='containert_ticket_last'>
                     <Typography variant='h2' sx={{ fontWeight: "bold", fontSize: "24px" }}>
                         Hemos enviado el ticket de tu compra a la direccion {contextUser.user.email}.¡Gracias por tu compra!

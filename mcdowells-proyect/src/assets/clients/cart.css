@@ -141,6 +141,15 @@
         gap: 2rem;
         margin-top: 2rem;
     }
+
+    .container_final_msg {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 2rem;
+        margin-top: 15rem;
+    }
     
     .containert_ticket {
         flex-direction: column;

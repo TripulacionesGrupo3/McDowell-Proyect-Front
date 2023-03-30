@@ -86,25 +86,25 @@ function Menus() {
             </div>
             <div className='centerMenu_1'>
                 <div className='menu_options'>
-                    <Typography variant='h2' sx={{ fontWeight: "bold", fontSize: "24px" }}>
+                    <Typography variant='h2' sx={{ fontWeight: "bold", fontSize: "20px" }}>
                         Complementos
                     </Typography>
                     <ArrowForwardIosIcon />
                 </div>
                 <div className='menu_options'>
-                    <Typography variant='h2' sx={{ fontWeight: "bold", fontSize: "24px" }}>
+                    <Typography variant='h2' sx={{ fontWeight: "bold", fontSize: "20px" }}>
                         Bebidas
                     </Typography>
                     <ArrowForwardIosIcon />
                 </div>
                 <div className='menu_options'>
-                    <Typography variant='h2' sx={{ fontWeight: "bold", fontSize: "24px" }}>
+                    <Typography variant='h2' sx={{ fontWeight: "bold", fontSize: "20px" }}>
                         Extras
                     </Typography>
                     <ArrowForwardIosIcon />
                 </div>
                 <div className='menu_options'>
-                    <Typography variant='h2' sx={{ fontWeight: "bold", fontSize: "24px" }}>
+                    <Typography variant='h2' sx={{ fontWeight: "bold", fontSize: "20px" }}>
                         Postres
                     </Typography>
                     <ArrowForwardIosIcon />
@@ -130,7 +130,7 @@ function Menus() {
             </div>
           
              {showModal && <ModalMenus  /> }
-             
+            
         </>
     )
 }
